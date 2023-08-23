@@ -1,0 +1,31 @@
+{
+    "app":{
+        "url": "http://fp-gnb.fisgroup.ru:8080/web/FormRunner/"
+    },
+    "creds": {
+        "sales_manager": {
+            "login": "Ковшов_МП",
+            "password": "Ковшов_МП"
+        },
+        "sales_boss": {
+            "login": "Руководитель_продаж",
+            "password": "Руководитель_продаж"
+        }
+    },
+    "selectors": {
+        "platform" : {
+            "login_field": "#login-wrapper input#field-login",
+            "pass_field": "#password-wrapper input#field-password",
+            "profile_icon": ".icon22.profile",
+            "logout": ".authDropdown.profile button.logout"
+        },
+        "app": {
+            "main_menu": "[data-control-name='Меню_приложения']",
+            "main_menu_items": "[data-control-name='Меню_приложения'] ul li",
+            "client_search": {
+                "name": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Поле_ввода_Полное_наименование'] input",
+                "search_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_поиск'] span"
+            }
+        }
+    }
+}
