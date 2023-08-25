@@ -10,6 +10,26 @@
         "sales_boss": {
             "login": "Руководитель_продаж",
             "password": "Руководитель_продаж"
+        },
+        "client_boss": {
+            "login": "Руководитель_КМ",
+            "password": "Руководитель_КМ"
+        },
+        "ca_boss": {
+            "login": "Руководитель_КА",
+            "password": "Руководитель_КА"
+        },
+        "secretary_cc": {
+            "login": "Секретарь_КК",
+            "password": "Секретарь_КК"
+        },
+        "secretary_gov": {
+            "login": "Секретарь_правления",
+            "password": "Секретарь_правления"
+        },
+        "accountant_boss": {
+            "login": "Бухгалтер_главный",
+            "password": "Бухгалтер_главный"
         }
     },
     "selectors": {
@@ -20,11 +40,63 @@
             "logout": ".authDropdown.profile button.logout"
         },
         "app": {
-            "main_menu": "[data-control-name='Меню_приложения']",
             "main_menu_items": "[data-control-name='Меню_приложения'] ul li",
+            "placeholder_buttons": {
+                "selector": "[data-control-name='Кнопки_этапов_рассмотрения_плейсхолдер'] [data-control-name='Группа_кнопок_решение'] button",
+                "order": {
+                    "to_accept": 2,
+                    "accept": 1
+                }
+            },
+            "func_buttons": {
+                "selector": "[data-control-name='Кнопки_этапов_рассмотрения_плейсхолдер'] [data-control-name='Группа_кнопок_решение'] button",
+                "order": {
+                    "to_accept": 5,
+                    "accept": 4
+                }
+            },            
             "client_search": {
-                "name": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Поле_ввода_Полное_наименование'] input",
-                "search_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_поиск'] span"
+                "filter": {
+                    "name": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Поле_ввода_Полное_наименование'] input"
+                },
+                "search_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_поиск'] span",
+                "clear_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_очистить'] span",
+                "result_table_items": "[data-control-name='Таблица_юр_лица'] tbody tr",
+                "create_app_button": "[data-control-name='Таблица_юр_лица'] span[data-name='создать заявку']",
+                "create_app_popup": {
+                    "create_new_app": "[data-control-name='Всплывающее_окно_Создание_заявки'] [data-control-name='Кнопка_Создать_новую'] span"
+                }
+            },
+            "task_search": {
+                "filter": {
+                    "app_number": "[data-control-name='Рамка_фильтр'] [data-control-name='Поле_ввода_заявка'] input",
+                    "task_status": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_статус_задачи'] input"
+                },
+                "search_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_поиск'] span",
+                "clear_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_очистить'] span",
+                "result_table_items": "[data-control-name='Таблица_задачи'] tbody tr",
+                "to_work_button": "[data-control-name='Таблица_задачи'] span[data-name='в_работу']"
+            },
+            "app_creation": {
+                "app_number_field": "[data-control-name='Поле_ввода_Номер_заявки'] input",
+                "sales_channel": "[data-control-name='Раскрывающийся_список_канал_продаж'] input",
+                "product_type": "[data-control-name='Раскрывающийся_список_вид_продукта'] input",
+                "duration_unit": "[data-control-name='Раскрывающийся_список_Единицы_измерения_срока'] input",
+                "rate_type": "[data-control-name='Раскрывающийся_список_тип_ставки'] input",
+                "rate_kind": "[data-control-name='Раскрывающийся_список_вид_ставки'] input",
+                "rate": "[data-control-name='Поле_ввода_суммы_процентная_ставка'] input",
+                "repayment_order": "[data-control-name='Раскрывающийся_список_Порядок'] input",
+                "pledge": {
+                    "edit_pledge_button": "[data-control-name='Таблица_Залоги'] span[data-name='изменить']",
+                    "add_pledge_giver": "[data-control-name='карточка_залога'] [data-control-name='рамка_залогодатель'] [data-control-name='группа_кнк_добавление_залогодателя'] span",
+                    "save_pledge_giver": "[data-control-name='поиск_залогодатель'] [data-control-name='кнп_сохранить'] span",
+                    "add_pledge": "[data-control-name='таблица_залоги'] span[data-name='добавить']",
+                    "pledge_type": "[data-control-name='добавление_залога'] [data-control-name='Раскрывающийся_список_вид_имущества'] input",
+                    "object_type": "[data-control-name='добавление_залога'] [data-control-name='Раскрывающийся_список_тип_объекта'] input",
+                    "pledge_descr": "[data-control-name='добавление_залога'] [data-control-name='с'] textarea",
+                    "pledge_save_button": "[data-control-name='добавление_залога'] [data-control-name='Группа_кнопок'] button span",
+                    "save_pledges": "[data-control-name='карточка_залога'] [data-control-name='кнп_сохранить'] span"
+                }
             }
         }
     }

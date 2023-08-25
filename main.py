@@ -1,12 +1,8 @@
-from api.testdriver import testdriver
+from api.scenario import scenario_tester
 import time
 
 if __name__ == '__main__':
-    driver = testdriver()
-    driver.login('sales_manager')
-    driver.find_client('name', 'сбербанк')
-    driver.logout()
-    driver.login('sales_boss')
-    driver.find_client('name', 'бтк')
-    driver.logout()
+    driver = scenario_tester()
+    driver.create_app('сбербанк')
+    driver.accept_new_app()
     
