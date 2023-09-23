@@ -49,10 +49,11 @@
                 }
             },
             "func_buttons": {
-                "selector": "[data-control-name='Кнопки_этапов_рассмотрения_плейсхолдер'] [data-control-name='Группа_кнопок_решение'] button",
+                "selector": "[data-control-name='Функциональная_группа_кнопок'] [data-control-name='Группа_кнопок_функц'] button",
                 "order": {
                     "to_accept": 5,
-                    "accept": 4
+                    "accept": 4,
+                    "complete": 12
                 }
             },            
             "client_search": {
@@ -62,7 +63,7 @@
                 "search_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_поиск'] span",
                 "clear_button": "[data-control-name='Панель_фильтр_поиска'] [data-control-name='Кнопка_очистить'] span",
                 "result_table_items": "[data-control-name='Таблица_юр_лица'] tbody tr",
-                "create_app_button": "[data-control-name='Таблица_юр_лица'] span[data-name='создать заявку']",
+                "to_work_button": "[data-control-name='Таблица_юр_лица'] span[data-name='создать заявку']",
                 "create_app_popup": {
                     "create_new_app": "[data-control-name='Всплывающее_окно_Создание_заявки'] [data-control-name='Кнопка_Создать_новую'] span"
                 }
@@ -70,12 +71,25 @@
             "task_search": {
                 "filter": {
                     "app_number": "[data-control-name='Рамка_фильтр'] [data-control-name='Поле_ввода_заявка'] input",
-                    "task_status": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_статус_задачи'] input"
+                    "app_status": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_статус_заявки'] input",
+                    "task_status": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_статус_задачи'] input",
+                    "task_type": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_тип_задачи'] input"
                 },
                 "search_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_поиск'] span",
                 "clear_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_очистить'] span",
                 "result_table_items": "[data-control-name='Таблица_задачи'] tbody tr",
                 "to_work_button": "[data-control-name='Таблица_задачи'] span[data-name='в_работу']"
+            },
+            "app_search": {
+                "filter": {
+                    "app_number": "[data-control-name='Рамка_фильтр'] [data-control-name='Поле_ввода_заявка'] input",
+                    "app_status": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_статус_заявки'] input",
+                    "app_stage": "[data-control-name='Рамка_фильтр'] [data-control-name='Раскрывающийся_список_этап_рассмотрения'] input"
+                },
+                "search_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_поиск'] span",
+                "clear_button": "[data-control-name='Рамка_фильтр'] [data-control-name='Кнопка_очистить'] span",
+                "result_table_items": "[data-control-name='Таблица_заявки'] tbody tr",
+                "to_work_button": "[data-control-name='Таблица_заявки'] span[data-name='в_работу']"
             },
             "app_creation": {
                 "app_number_field": "[data-control-name='Поле_ввода_Номер_заявки'] input",
@@ -87,6 +101,7 @@
                 "rate": "[data-control-name='Поле_ввода_суммы_процентная_ставка'] input",
                 "repayment_order": "[data-control-name='Раскрывающийся_список_Порядок'] input",
                 "pledge": {
+                    "add_pledge_button": "[data-control-name='Таблица_Залоги'] span[data-name='добавить']",
                     "edit_pledge_button": "[data-control-name='Таблица_Залоги'] span[data-name='изменить']",
                     "add_pledge_giver": "[data-control-name='карточка_залога'] [data-control-name='рамка_залогодатель'] [data-control-name='группа_кнк_добавление_залогодателя'] span",
                     "save_pledge_giver": "[data-control-name='поиск_залогодатель'] [data-control-name='кнп_сохранить'] span",
@@ -94,8 +109,213 @@
                     "pledge_type": "[data-control-name='добавление_залога'] [data-control-name='Раскрывающийся_список_вид_имущества'] input",
                     "object_type": "[data-control-name='добавление_залога'] [data-control-name='Раскрывающийся_список_тип_объекта'] input",
                     "pledge_descr": "[data-control-name='добавление_залога'] [data-control-name='с'] textarea",
-                    "pledge_save_button": "[data-control-name='добавление_залога'] [data-control-name='Группа_кнопок'] button span",
+                    "pledge_addition_group": {
+                        "selector": "[data-control-name='добавление_залога'] [data-control-name='Группа_кнопок'] button span",
+                        "order": {
+                            "save": 0,
+                            "cancel": 1
+                        }
+                    },
                     "save_pledges": "[data-control-name='карточка_залога'] [data-control-name='кнп_сохранить'] span"
+                },
+                "participant": {
+                    "add_part_button": "[data-control-name='Таблица_участники'] span[data-name='добавить']",
+                    "edit_part_button": "[data-control-name='Таблица_участники'] span[data-name='изменить']",
+                    "part_type_input": "[data-control-name='Всплывающее_окно_поиск_участника'] [data-control-name='Раскрывающийся_список_тип_участия'] input",
+                    "save_participant": "[data-control-name='Всплывающее_окно_поиск_участника'] [data-control-name='Кнопка_Выбрать'] span"
+                }
+            },
+            "prescoring": {
+                "prescoring_field": "[data-control-name='Многострочное_поле_ввода_Выводы_КА_по_экспертизе'] textarea",
+                "inform_button": "[data-control-name='Кнопка_Сформировать_уведомление'] span",
+                "inform_date": "[data-control-name='Дата_Дата_уведомления'] input",
+                "client_informed": "[data-control-name='Кнопка_Уведомление'] span",
+                "inform": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками_Решение_по_задаче'] [data-control-name='Группа_кнопок_Решение_клиента'] button span",
+                    "order": {
+                        "success": 0,
+                        "reject": 1
+                    }
+                },
+                "documents_requested": "[data-control-name='Флажок_Документы_запрошены'] label",
+                "documents_given": "[data-control-name='Флажок_Документы_предоставлены'] label",
+                "task_completed": "[data-control-name='Кнопка_Завершить'] span"
+            },
+            "expertises": {
+                "add_document_button": "[data-control-name='Таблица_документы'] span[data-name='добавить']",
+                "add_document_popup": {
+                    "doc_type": "[data-control-name='Всплывающее_окно_добавление_документа'] [data-control-name='Раскрывающийся_список_вид_документа'] input",
+                    "doc_name": "[data-control-name='Всплывающее_окно_добавление_документа'] [data-control-name='Поле_ввода_наименование'] input",
+                    "upload": "[data-control-name='Всплывающее_окно_добавление_документа'] [data-control-name='Коллекция_файлов'] .tool.ui-btn.add-button",
+                    "add_file": "#ui-id-4 button.add-button",
+                    "save_file": "#ui-id-4 button.save-button",
+                    "download_file": "#ui-id-4 button.download-button",
+                    "save_doc": "[data-control-name='Всплывающее_окно_добавление_документа'] [data-control-name='Кнопка_Сохранить'] span"
+                },
+                "popup_warning_button_group": {
+                    "selector": "[data-control-name='Всплывающее_окно_Произвольный_компонент'] [data-control-name='Группа_кнопок_документы'] button span",
+                    "order": {
+                        "accept": 0,
+                        "decline": 1
+                    }
+                } 
+            },
+            "secretary": {
+                "add_timesheet": "[data-control-name='Таблица_заседания'] span[data-name='добавить']",
+                "sitting_type": "[data-control-name='Всплывающее_окно_редактирование'] [data-control-name='Раскрывающийся_список_форма_проведения'] input",
+                "sitting_date": "[data-control-name='Всплывающее_окно_редактирование'] [data-control-name='Дата_и_время_проведения'] input.date",
+                "sitting_hours": "[data-control-name='Всплывающее_окно_редактирование'] [data-control-name='Дата_и_время_проведения'] input.hours",
+                "sitting_minutes": "[data-control-name='Всплывающее_окно_редактирование'] [data-control-name='Дата_и_время_проведения'] input.minutes",
+                "save_timesheet": "[data-control-name='Всплывающее_окно_редактирование'] [data-control-name='Кнопка_сохранить'] span",
+                "apps_for_sitting": "[data-control-name='Таблица_заявки'] table tr",
+                "add_to_sitting": "[data-control-name='Таблица_заявки'] span[data-name='в_повестку']",
+                "add_to_sitting_type": "[data-control-name='Всплывающее_окно_Добавление_в_повестку'] [data-control-name='Раскрывающийся_список_вид_заседания'] input",
+                "add_to_sitting_date": "[data-control-name='Всплывающее_окно_Добавление_в_повестку'] [data-control-name='Раскрывающийся_список_Дата_проведения_КК'] input",
+                "add_to_sitting_save": "[data-control-name='Всплывающее_окно_Добавление_в_повестку'] [data-control-name='Кнопка_Сохранить'] span",
+                "active_sittings": "[data-control-name='Таблица_заседания'] tbody tr",
+                "task_apps": "[data-control-name='Таблица_заявки'] tbody tr",
+                "decision_button": "[data-control-name='Таблица_заявки'] span[data-name='внести_решение']",
+                "decision_option": "[data-control-name='Внесение_результатов_проведения_КК'] [data-control-name='Раскрывающийся_список_решение'] input",
+                "popup_title": ".dialog_title",
+                "sittings_table": "[data-control-name='Tabs.завершенные_заседания'] [data-control-name='Заявки_заседания'] [data-control-name='Таблица_заседания'] tbody tr",
+                "apps_table": "[data-control-name='Tabs.завершенные_заседания'] [data-control-name='Таблица_заявки'] tbody tr",
+                "inform_client": "[data-control-name='Tabs.завершенные_заседания'] [data-control-name='Таблица_заявки'] span[data-name='информирование']",
+                "to_board": "[data-control-name='Tabs.завершенные_заседания'] [data-control-name='Таблица_заявки'] span[data-name='правление']",
+                "take_task": {
+                    "selector": "[data-control-name='Группа_кнопок'] button span",
+                    "order": {
+                        "take_task": 1
+                    }
+                },
+                "secretary_task": {
+                    "selector": "[data-control-name='Формирование_повестки_кк'] [data-control-name='Группа_кнопок_повестка_кк'] button span",
+                    "order": {
+                        "close_sitting": 3
+                    }
+                },
+                "secretary_decision": {
+                    "selector": "[data-control-name='Внесение_результатов_проведения_КК'] [data-control-name='Группа_кнопок_отмена_и_сохранить'] button span",
+                    "order": {
+                        "save": 0,
+                        "cancel": 1
+                    }
+                } 
+            },
+            "inform": {
+                "sm_comment": "[data-control-name='Поле_ввода_Комментарий_МП'] textarea",
+                "inform_date": "[data-control-name='Дата_согласования'] input",
+                "inform": {
+                    "selector": "[data-control-name='Группа_кнопок_согласования'] button span",
+                    "order": {
+                        "success": 0
+                    }
+                }
+            },
+            "cod": {
+                "loan_file": "[data-control-name='Файл_прикреплённый_кредитный_договор'] button.jq_attach__button.jq_attach__add_button",
+                "loan_file_delete": "[data-control-name='Файл_прикреплённый_кредитный_договор'] button.jq_attach__button.jq_attach__del_button",
+                "accounts_title": "[data-control-name='Таблица_Счета'] .ui-table-mainheader",
+                "loan_inputs": {
+                    "loan_number": "[data-control-name='Форма_договора_1'] [data-control-name='Поле_ввода_номера_договора'] input",
+                    "loan_location": "[data-control-name='Форма_договора_1'] [data-control-name='Поле_ввода_места_заключения_договора'] input",
+                    "loan_date": "[data-control-name='Форма_договора_1'] [data-control-name='Дата_заключения'] input",
+                    "loan_end": "[data-control-name='Форма_договора_1'] [data-control-name='Дата_возврата_кредита'] input",
+                    "fio": "[data-control-name='Подписант_1'] [data-control-name='Поле_ввода_ФИО'] input",
+                    "job": "[data-control-name='Подписант_1'] [data-control-name='Поле_ввода_должности'] input",
+                    "reason": "[data-control-name='Подписант_1'] [data-control-name='Поле_ввода_основания_полномочий'] input",
+                    "fio2": "[data-control-name='Подписант_2'] [data-control-name='Поле_ввода_ФИО'] input",
+                    "job2": "[data-control-name='Подписант_2'] [data-control-name='Поле_ввода_должности'] input",
+                    "reason2": "[data-control-name='Подписант_2'] [data-control-name='Поле_ввода_основания_полномочий'] input"
+                },
+                "save_contract_button_group": {
+                    "selector": "[data-control-name='Группа_кнопок_1'] button span",
+                    "order": {
+                        "save": 0,
+                        "cancel": 1
+                    }
+                },
+                "pledges_table": "[data-control-name='Вкладка_договоры_залога_1'] [data-control-name='Таблица_договоров_залога'] tbody tr",
+                "pledges_button_group": {
+                    "selector": "[data-control-name='Вкладка_договоры_залога_1'] [data-control-name='Группа_кнопок'] button span",
+                    "order": {
+                        "edit": 2
+                    }
+                },
+                "participants_table": "[data-control-name='Вкладка_договоры_контрагентов_1'] [data-control-name='Таблица_договоров'] tbody tr",
+                "parts_button_group": {
+                    "selector": "[data-control-name='Вкладка_договоры_контрагентов_1'] [data-control-name='Группа_кнопок'] button span",
+                    "order": {
+                        "edit": 1
+                    }
+                }
+            },
+            "accept_cod": {
+                "result_comment": "[data-control-name='Поле_ввода_Комментарий_МП']  textarea",
+                "result_dropdown": "[data-control-name='Рамка_согласования_правок'] [data-control-name='Раскрывающийся_список_решения_согласования'] input",
+                "save_result_button_group": {
+                    "selector": "[data-control-name='Группа_кнопок_1'] button span",
+                    "order": {
+                        "save": 2
+                    }
+                },
+                "result_button_group": {
+                    "selector": "[data-control-name='Группа_кнопок_согласования'] button span",
+                    "order": {
+                        "accept": 0,
+                        "mild_reject": 3,
+                        "reject": 4,
+                        "cod_error": 5
+                    }
+                }
+            },
+            "tabs": {
+                "app_tabs": {
+                    "selector": "[data-control-name='Вкладки_контейнер_заявки'] ul.tab-head li",
+                    "data_index": {
+                        "prescoring_decision": 7,
+                        "documents": 3,
+                        "cod": 4
+                    }
+                },
+                "task_decision": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками_Решение_по_задаче'] ul.tab-head li",
+                    "data_index": {
+                        "task_decision": 1
+                    }
+                },
+                "cod_decision": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками_для_задачи_КМ'] ul.tab-head li",
+                    "data_index": {
+                        "cod_decision": 5
+                    }
+                },
+                "app_details": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками_для_задачи_КМ'] ul.tab-head li",
+                    "data_index": {
+                        "documents": 3
+                    }
+                },
+                "secretary_task": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками'] ul.tab-head li",
+                    "data_index": {
+                        "results": 2,
+                        "preparation": 1
+                    }
+                },
+                "sittings": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками'] ul.tab-head li",
+                    "data_index": {
+                        "active": 0,
+                        "completed": 1
+                    }
+                },
+                "cod_contracts": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками_1'] ul.tab-head li",
+                    "data_index": {
+                        "credit": 0,
+                        "pledges": 1,
+                        "participants": 2
+                    }
                 }
             }
         }

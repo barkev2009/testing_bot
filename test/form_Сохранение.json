@@ -1,0 +1,428 @@
+{
+  "transferContext": {
+    "type": "VCM_FORM",
+    "uuid": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.9f34d166-95f4-408c-ac38-5550bc7d076e",
+    "formatVersion": "V1",
+    "creationDate": "2023-09-14T21:00:38",
+    "context": {
+      "@xsi.type": "vcmForm",
+      "isModified": false,
+      "creationDate": "2023-04-28T18:27:48.790+07:00",
+      "id": 28579,
+      "modificationDate": "2023-05-03T17:01:24.289+07:00",
+      "modifiedBy": "annlan",
+      "uuid": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.9f34d166-95f4-408c-ac38-5550bc7d076e",
+      "auditComment": "",
+      "description": "",
+      "forIssue": "",
+      "name": "Сохранение",
+      "package_id": {
+        "@xsi.type": "xs:string",
+        "$": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.3a8950ba-fe6b-4fc6-b365-aa38c3eb108d*AppPackage@CL.Основной_интерфейс.Формы.АРМ_Сотрудника.Всплывающие_окна"
+      },
+      "strictContexts": true,
+      "revUniqueName": "null",
+      "userLogin": "annlan",
+      "translateToDb": false,
+      "isAbstract": false,
+      "isDebuging": false,
+      "vcmDialect": 2,
+      "isEventLog": false,
+      "sessionTemporaryObjects": false,
+      "uiStart": false,
+      "clientPath": "null",
+      "contextTree": {
+        "id": "839a6ec4-4a2d-4f78-82c2-1ddbfc4a1e2e",
+        "qname": "root",
+        "lazyLoad": false,
+        "context": {},
+        "separateFormTx": false,
+        "enUDMLSupport": false
+      },
+      "data": {
+        "control_id": "Основной_интерфейс.Формы.АРМ_Сотрудника.Всплывающие_окна.Сохранение",
+        "header": {
+          "params": [],
+          "events": []
+        },
+        "inplace_controls": [],
+        "component": {
+          "context": {},
+          "param_bindings": [
+            {
+              "qname": "Кнопка_да.Label",
+              "type": "content",
+              "value": "Да"
+            },
+            {
+              "qname": "Кнопка_да.SendForm",
+              "type": "content",
+              "value": "no",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.SaveForm",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.ButtonStyle",
+              "type": "content",
+              "value": "additional",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.LeftPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.FixedWidth",
+              "type": "content",
+              "value": 0.0,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.TopPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.Float",
+              "type": "content",
+              "value": "right",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.SizeByContent",
+              "type": "content",
+              "value": true,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_да.RightPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.Label",
+              "type": "content",
+              "value": "Нет"
+            },
+            {
+              "qname": "Кнопка_нет.SendForm",
+              "type": "content",
+              "value": "no",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.SaveForm",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.ButtonStyle",
+              "type": "content",
+              "value": "main",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.LeftPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.TopPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.Float",
+              "type": "content",
+              "value": "right",
+              "param_id": ""
+            },
+            {
+              "qname": "Кнопка_нет.RightPadding",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            }
+          ],
+          "cells": [
+            {
+              "title": "some_title",
+              "css_classes": "",
+              "is_vertical": true
+            },
+            [
+              {
+                "title": "nested group",
+                "css_classes": "",
+                "is_vertical": false,
+                "height": 0.0
+              },
+              {
+                "name": "Кнопка_да",
+                "flexRate": 22.0,
+                "width": 22.0
+              },
+              {
+                "name": "Кнопка_нет",
+                "flexRate": 2.0,
+                "width": 2.0
+              }
+            ]
+          ],
+          "cell_bindings": [
+            {
+              "qname": "Кнопка_да",
+              "control_id": "ext_button.control"
+            },
+            {
+              "qname": "Кнопка_нет",
+              "control_id": "ext_button.control"
+            }
+          ],
+          "diagram": {
+            "event_bindings": [
+              {
+                "id": "Event644baefff4a87",
+                "name": "Кнопка_да.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "fullname": "Кнопка_да",
+                  "path": [],
+                  "widget": "Кнопка_да",
+                  "widgetType": "Кнопка",
+                  "actionArgs": []
+                },
+                "nodeId": "uuid644baefff4a880.35502019",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event644baf72f4dec",
+                "name": "Кнопка_нет.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "fullname": "Кнопка_нет",
+                  "path": [],
+                  "widget": "Кнопка_нет",
+                  "widgetType": "Кнопка",
+                  "actionArgs": []
+                },
+                "nodeId": "uuid644baf72f4ded5.66579612",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              }
+            ],
+            "groups": [],
+            "nodes": [
+              {
+                "id": "uuid644baf79f4df22.05316335",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid644baf79f4df22.05316335",
+                  "type": "udms",
+                  "name": "Сервер",
+                  "path": [],
+                  "scriptId": "uuid644baf79f4df09.98100219",
+                  "inputs": [],
+                  "outputs": [],
+                  "scriptName": "Сценарий (Сервер)"
+                },
+                "position": {
+                  "x": 535.0,
+                  "y": 300.0
+                },
+                "nextIdConnectors": [
+                  "uuid644baf79f4df31.49070850"
+                ],
+                "prevIdConnectors": [
+                  "uuid644baf72f4def6.63457232"
+                ]
+              },
+              {
+                "id": "uuid644baf72f4dee6.14899476",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid644baf72f4dee6.14899476"
+                },
+                "position": {
+                  "x": 535.0,
+                  "y": 450.0
+                },
+                "prevIdConnectors": [
+                  "uuid644baf79f4df31.49070850"
+                ]
+              },
+              {
+                "id": "uuid644baf72f4ded5.66579612",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid644baf72f4ded5.66579612",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "actionArgs": [],
+                  "widget": "Кнопка_нет",
+                  "widgetType": "Кнопка",
+                  "widgetTypeView": "Кнопка",
+                  "path": []
+                },
+                "position": {
+                  "x": 535.0,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid644baf72f4def6.63457232"
+                ],
+                "prevIdConnectors": []
+              },
+              {
+                "id": "uuid644baefff4a880.35502019",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid644baefff4a880.35502019",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "widget": "Кнопка_да",
+                  "widgetType": "Кнопка",
+                  "widgetTypeView": "Кнопка",
+                  "path": [],
+                  "actionArgs": []
+                },
+                "position": {
+                  "x": 200.0,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid644baefff4a8a4.50483573"
+                ],
+                "prevIdConnectors": []
+              },
+              {
+                "id": "uuid644baf04f4a953.96870328",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid644baf04f4a953.96870328",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid644baf04f4a933.57541892",
+                  "code": "Окно_процесса.вызватьПользовательскоеСобытие(\u0027сохранить\u0027, {});\nвызватьПользовательскоеСобытие(\"скрытие_окна\");",
+                  "scriptName": "Сценарий (Форма)"
+                },
+                "position": {
+                  "x": 200.0,
+                  "y": 300.0
+                },
+                "nextIdConnectors": [
+                  "uuid644baf04f4a967.15748016"
+                ],
+                "prevIdConnectors": [
+                  "uuid644baefff4a8a4.50483573"
+                ]
+              },
+              {
+                "id": "uuid644baefff4a893.75355491",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid644baefff4a893.75355491"
+                },
+                "position": {
+                  "x": 200.0,
+                  "y": 450.0
+                },
+                "prevIdConnectors": [
+                  "uuid644baf04f4a967.15748016"
+                ]
+              }
+            ],
+            "connectors": [
+              {
+                "id": "uuid644baf72f4def6.63457232",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid644baf72f4def6.63457232"
+                },
+                "from": "uuid644baf72f4ded5.66579612",
+                "to": "uuid644baf79f4df22.05316335",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid644baf79f4df31.49070850",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid644baf79f4df31.49070850"
+                },
+                "from": "uuid644baf79f4df22.05316335",
+                "to": "uuid644baf72f4dee6.14899476",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid644baefff4a8a4.50483573",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid644baefff4a8a4.50483573"
+                },
+                "from": "uuid644baefff4a880.35502019",
+                "to": "uuid644baf04f4a953.96870328",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid644baf04f4a967.15748016",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid644baf04f4a967.15748016"
+                },
+                "from": "uuid644baf04f4a953.96870328",
+                "to": "uuid644baefff4a893.75355491",
+                "contentPositions": {}
+              }
+            ],
+            "variables": [],
+            "formAttr": []
+          }
+        },
+        "jsClientLibraries": [],
+        "contextTree": {
+          "id": "839a6ec4-4a2d-4f78-82c2-1ddbfc4a1e2e",
+          "qname": "root",
+          "lazyLoad": false,
+          "context": {},
+          "separateFormTx": false,
+          "enUDMLSupport": false
+        },
+        "vcmDialect": "2"
+      },
+      "layerName": "null",
+      "qualifiedName": "null",
+      "translate": "{}",
+      "udmDialect": "V3",
+      "udmScripts": {
+        "content": [
+          {
+            "id": "uuid644baf79f4df09.98100219",
+            "context": [],
+            "script": "udm:(выбранный_экземпляр.сохранение_заявки :\u003d true);"
+          }
+        ]
+      },
+      "validationErrors": "null"
+    },
+    "version": "1.3.03.19.01",
+    "expandedContent": true
+  }
+}

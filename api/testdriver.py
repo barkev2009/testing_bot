@@ -22,7 +22,7 @@ def wait(seconds):
 
 class testdriver:
 
-    DELAY = 20
+    DELAY = 10
 
     def __init__(self) -> None:
         self.driver = get_driver()
@@ -33,31 +33,38 @@ class testdriver:
         self.creds = self.config.creds
         self.app_params = dotify({
             'app_number': None,
-            'stage': None
+            'stage': None,
+            'sitting_datetime': None
         })
     
     def select(self, selector):
-        element = WebDriverWait(self.driver, self.DELAY).until(EC.visibility_of_element_located((By.CSS_SELECTOR, selector)))
+        element = WebDriverWait(self.driver, self.DELAY).until(EC.element_to_be_clickable((By.CSS_SELECTOR, selector)))
         return element
     
     def multiselect(self, selector):
-        element = WebDriverWait(self.driver, self.DELAY).until(EC.visibility_of_any_elements_located((By.CSS_SELECTOR, selector)))
+        element = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, selector)))
         return element
     
-    def print_to_input(self, input_selector, input):
+    def print_to_input(self, input_selector, input, wait=0):
+        self.click_element(input_selector)
         input_field = self.select(input_selector)
         input_field.send_keys(Keys.CONTROL + "a")
         input_field.send_keys(Keys.DELETE)
         input_field.send_keys(input)
+        if wait != 0:
+            time.sleep(wait)
     
     def hit_enter(self, selector):
         field = self.select(selector)
         field.send_keys(Keys.ENTER)
     
-    def click_element(self, selector):
+    def click_element(self, selector, wait=0):
         elem = self.select(selector)
         elem.click()
+        if wait != 0:
+            time.sleep(wait)
     
+    @wait(0.5)
     def click_table_button(self, selector):
         elem = self.select(selector)
         ac = ActionChains(self.driver)
@@ -84,19 +91,23 @@ class testdriver:
         self.app_params.app_number = app_number.get_attribute('value')
         print(f'Номер заявки: {self.app_params.app_number}')
     
-    @wait(0.5)
+    @wait(1)
     def select_dropdown(self, dropdown_selector, dropdown_value):
         if type(dropdown_value) == list:
             for item in dropdown_value:
                 self.print_to_input(dropdown_selector, item)
-                self.hit_enter(dropdown_selector)
+                # self.click_element(dropdown_selector)
         else:
             self.print_to_input(dropdown_selector, dropdown_value)
-            self.hit_enter(dropdown_selector)
+            # self.click_element(dropdown_selector)
     
-    def click_button_from_group(self, button_group_selector, button_index):
-        buttons = self.multiselect(button_group_selector)
-        buttons[button_index].click()
+    @wait(0.5)
+    def click_button_from_group(self, button_group_selector, button_code, addition=None):
+        if addition:
+            buttons = self.multiselect(addition + button_group_selector.selector)
+        else:
+            buttons = self.multiselect(button_group_selector.selector)
+        buttons[button_group_selector.order[button_code]].click()
 
     def setup_stage(self, stage_name):
         self.app_params.stage = stage_name
@@ -105,7 +116,59 @@ class testdriver:
     def click_placeholder_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.placeholder_buttons.selector)))
         buttons[self.app_selectors.placeholder_buttons.order[button_code]].click()
+        time.sleep(2)
     
     def click_func_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.func_buttons.selector)))
         buttons[self.app_selectors.func_buttons.order[button_code]].click()
+        time.sleep(2)
+    
+    def click_tab(self, tab_group, tab_code):
+        tabs = self.multiselect(self.app_selectors.tabs[tab_group].selector)
+        list(filter(lambda x: x.get_attribute('data-index') == str(self.app_selectors.tabs[tab_group].data_index[tab_code]), tabs))[0].click()
+        time.sleep(1)
+
+    def initiate_stage(self, initiator, stage_name):
+        self.login(initiator)
+        if not self.app_params.app_number:
+            raise ValueError('Номер заявки пустой')
+        self.setup_stage(stage_name)
+    
+    def find_object_in_table(self, selector_group, search_params, wait=0):
+        self.click_element(self.app_selectors[selector_group].clear_button, 0.5)
+
+        for param in search_params:
+            if param.type == 'input':
+                self.print_to_input(self.app_selectors[selector_group].filter[param.field], param.value)
+            elif param.type == 'dropdown':
+                self.select_dropdown(self.app_selectors[selector_group].filter[param.field], param.value)
+        
+        self.click_element(self.app_selectors[selector_group].search_button, 0.5)
+        self.select_table_item(self.app_selectors[selector_group].result_table_items, 0)
+        self.click_table_button(self.app_selectors[selector_group].to_work_button)
+        if wait != 0:
+            time.sleep(wait)
+    
+    def wait_doc_upload(self, click_selector, wait_selector):
+        wait_element = WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, wait_selector)))
+        if (wait_element):
+            self.click_element(click_selector)
+    
+    def close_alert(self, wait=0):
+        time.sleep(0.5)
+        dialogs = len(self.multiselect('button.ui-dialog-titlebar-close'))
+        print(dialogs)
+        for _ in range(dialogs):
+            try:
+                elem = self.select('button.ui-dialog-titlebar-close')
+                print(elem)
+                # elem.click()
+                elem.send_keys(Keys.ESCAPE)
+                print('CLICK')
+            except Exception:
+                print('FAIL CLICK')
+                pass
+        print('-'*60)
+        if wait != 0:
+            time.sleep(wait)
+    

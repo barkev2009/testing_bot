@@ -1,0 +1,2162 @@
+{
+  "transferContext": {
+    "type": "VCM_FORM",
+    "uuid": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.1c77c989-5be5-4845-9fac-843565cec979",
+    "formatVersion": "V1",
+    "creationDate": "2023-09-15T11:33:01",
+    "context": {
+      "@xsi.type": "vcmForm",
+      "isModified": false,
+      "creationDate": "2023-04-18T19:11:09.602+07:00",
+      "id": 13093,
+      "modificationDate": "2023-09-13T16:24:12.147+07:00",
+      "modifiedBy": "Kovshov_ka",
+      "uuid": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.1c77c989-5be5-4845-9fac-843565cec979",
+      "auditComment": "",
+      "description": "",
+      "forIssue": "",
+      "name": "Информирование_клиента",
+      "package_id": {
+        "@xsi.type": "xs:string",
+        "$": "3f7feb20-afd7-44ef-9a6c-cf0704f44a08.fbfd44f7-ccc7-475d-93a2-dbb1d217515d*AppPackage@CL.Основной_интерфейс.Формы.Кредитный_комитет"
+      },
+      "strictContexts": false,
+      "revUniqueName": "null",
+      "userLogin": "Kovshov_ka",
+      "translateToDb": false,
+      "isDebuging": false,
+      "isEventLog": false,
+      "clientPath": "null",
+      "contextTree": {
+        "id": "036aa8cd-87a4-46c1-8d8a-4bf22e7ffc27",
+        "qname": "root",
+        "lazyLoad": false,
+        "context": {
+          "names": [
+            {
+              "name": "задача",
+              "type": "UDM",
+              "stored": false,
+              "inputAttr": true,
+              "id": "Context5e7d71318b689",
+              "description": "",
+              "udm_type": "Задача.Задача"
+            },
+            {
+              "name": "файл",
+              "type": "binary",
+              "stored": false,
+              "inputAttr": false,
+              "id": "Context5e7d816e8c7a5",
+              "description": ""
+            },
+            {
+              "name": "только_просмотр",
+              "type": "bool",
+              "stored": false,
+              "inputAttr": true,
+              "id": "Context5f54c6d0d3c79",
+              "description": "",
+              "is_collection": false
+            },
+            {
+              "name": "код_этапа",
+              "type": "string",
+              "stored": false,
+              "inputAttr": false,
+              "id": "Context647f47cc4895b",
+              "description": ""
+            }
+          ]
+        },
+        "exprSegments": [
+          {
+            "id": "s5e7d71318b68a",
+            "text": "задача",
+            "qname": "formattr_Context5e7d71318b689"
+          },
+          {
+            "id": "s5e7d816e8c7a6",
+            "text": "файл",
+            "qname": "formattr_Context5e7d816e8c7a5"
+          },
+          {
+            "id": "s5f54cbb2d68ff",
+            "text": "только_просмотр",
+            "qname": "formattr_Context5f54c6d0d3c79"
+          },
+          {
+            "id": "s647f47cc4895c",
+            "text": "код_этапа",
+            "qname": "formattr_Context647f47cc4895b"
+          }
+        ],
+        "children": [
+          {
+            "id": "node5e7c8593e674d",
+            "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.сведения",
+            "lazyLoad": false,
+            "context": {},
+            "exprSegments": [
+              {
+                "id": "s5e7d71388b68c",
+                "text": "задача",
+                "qname": "Работа_с_задачей.задача"
+              },
+              {
+                "id": "s5e7d71a18b80c",
+                "text": "true",
+                "qname": "Работа_с_задачей.только_просмотр"
+              }
+            ],
+            "children": [
+              {
+                "isNested": true,
+                "id": "node6501718445d59",
+                "lazyLoad": false,
+                "qname": "Работа_с_задачей",
+                "control_id": "Экспертиза.Формы.Компоненты.Работа_с_задачей",
+                "bindings": [
+                  {
+                    "name": "задача",
+                    "expression": "задача"
+                  },
+                  {
+                    "name": "только_просмотр",
+                    "expression": "true"
+                  }
+                ],
+                "separateFormTx": false
+              }
+            ],
+            "separateFormTx": false,
+            "enUDMLSupport": false
+          },
+          {
+            "id": "node5e7d71d58b815",
+            "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче",
+            "lazyLoad": false,
+            "context": {},
+            "expressions": [
+              {
+                "id": "e5f54c967d5e44",
+                "text": "INDEX([\u0027выполнена_исполнителем\u0027, \u0027выполнена\u0027, \u0027отмена\u0027], задача.статус.код) !\u003d -1 or только_просмотр",
+                "qname": "Кнопка_Сформировать_уведомление.Disabled"
+              },
+              {
+                "id": "e5e7d8fa58cc4d",
+                "text": "файл",
+                "qname": "Файл_Уведомления.Content"
+              }
+            ],
+            "exprSegments": [
+              {
+                "id": "s64a5594904ee7",
+                "text": "задача.заявка",
+                "qname": "Согласование_с_клиентом_1.заявка"
+              },
+              {
+                "id": "s64a5595604ee8",
+                "text": "задача",
+                "qname": "Согласование_с_клиентом_1.задача_согласования"
+              },
+              {
+                "id": "s64a5595c04ee9",
+                "text": "только_просмотр",
+                "qname": "Согласование_с_клиентом_1.только_просмотр"
+              }
+            ],
+            "children": [
+              {
+                "id": "transform_node5e7d794e8bfc9",
+                "qname": "Файл_Уведомления",
+                "context": {
+                  "names": [
+                    {
+                      "name": "идОбъекта_41832b95",
+                      "type": "string",
+                      "stored": true,
+                      "inputAttr": true,
+                      "id": "Context5e7d794e8bfca"
+                    }
+                  ]
+                },
+                "expressions": [],
+                "exprSegments": [],
+                "bindings": [],
+                "isTransformNode": true,
+                "separateFormTx": false,
+                "enUDMLSupport": false
+              },
+              {
+                "isNested": true,
+                "id": "node6501718445eba",
+                "lazyLoad": false,
+                "qname": "Согласование_с_клиентом_1",
+                "control_id": "Задача_заявки.Формы.Компоненты.Согласование_с_клиентом",
+                "bindings": [
+                  {
+                    "name": "только_просмотр",
+                    "expression": "только_просмотр"
+                  },
+                  {
+                    "name": "задача_согласования",
+                    "expression": "задача"
+                  },
+                  {
+                    "name": "заявка",
+                    "expression": "задача.заявка"
+                  }
+                ],
+                "separateFormTx": false
+              }
+            ],
+            "separateFormTx": false,
+            "enUDMLSupport": false
+          }
+        ],
+        "separateFormTx": false,
+        "enUDMLSupport": false,
+        "beforeRenderId": "eventScript_beforeRender"
+      },
+      "data": {
+        "control_id": "Основной_интерфейс.Формы.Кредитный_комитет.Информирование_клиента",
+        "header": {
+          "params": [],
+          "events": []
+        },
+        "inplace_controls": [
+          {
+            "control_id": "Кредитный_комитет.Формы.Информирование_клиента.inplace_control_5e7c8593e674c",
+            "header": {
+              "params": [],
+              "events": []
+            },
+            "inplace_controls": [],
+            "component": {
+              "context": {},
+              "param_bindings": [
+                {
+                  "qname": "Работа_с_задачей.задача",
+                  "type": "context",
+                  "exprSegment": "s5e7d71388b68c",
+                  "param_id": "Context5cf64e4919f20"
+                },
+                {
+                  "qname": "Работа_с_задачей.только_просмотр",
+                  "type": "context",
+                  "exprSegment": "s5e7d71a18b80c",
+                  "param_id": "Context5d5a32d88ddee"
+                },
+                {
+                  "qname": "FixedHeight",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Работа_с_задачей.FixedHeight",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                }
+              ],
+              "cells": [
+                {
+                  "title": "some_title",
+                  "css_classes": "",
+                  "is_vertical": true
+                },
+                {
+                  "name": "Работа_с_задачей",
+                  "height": 3168.0
+                }
+              ],
+              "cell_bindings": [
+                {
+                  "qname": "Работа_с_задачей",
+                  "control_id": "Экспертиза.Формы.Компоненты.Работа_с_задачей"
+                }
+              ],
+              "diagram": {
+                "groups": [],
+                "nodes": [],
+                "connectors": [],
+                "variables": [],
+                "formAttr": []
+              }
+            }
+          },
+          {
+            "control_id": "Основной_интерфейс.Формы.Кредитный_комитет.Информирование_клиента.inplace_control_5e7d71d58b814",
+            "header": {
+              "params": [],
+              "events": []
+            },
+            "inplace_controls": [],
+            "component": {
+              "context": {},
+              "param_bindings": [
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.Label",
+                  "type": "content",
+                  "value": "Сформировать уведомление"
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.SendForm",
+                  "type": "content",
+                  "value": "no",
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.SaveForm",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.ButtonStyle",
+                  "type": "content",
+                  "value": "supporting",
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.RightPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.LeftPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.BottomPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.TopPadding",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.Label",
+                  "type": "content",
+                  "value": "Клиент уведомлен"
+                },
+                {
+                  "qname": "Кнопка_Уведомление.SendForm",
+                  "type": "content",
+                  "value": "no",
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.RightPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.LeftPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.BottomPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.SaveForm",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.ButtonStyle",
+                  "type": "content",
+                  "value": "base",
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.Disabled",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.Label",
+                  "type": "content",
+                  "value": "Дата уведомления"
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.RightPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.LeftPadding",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.BottomPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.Required",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Уведомление.Visible",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Дата_Дата_уведомления.Visible",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.Label",
+                  "type": "content",
+                  "value": "Уведомление клиента"
+                },
+                {
+                  "qname": "Файл_Уведомления.BufferSave",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.ReadOnly",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.RightPadding",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.LeftPadding",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.BottomPadding",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.TopPadding",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.Visible",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Файл_Уведомления.Content",
+                  "type": "content",
+                  "expression": "e5e7d8fa58cc4d",
+                  "param_id": ""
+                },
+                {
+                  "qname": "Кнопка_Сформировать_уведомление.Disabled",
+                  "type": "content",
+                  "expression": "e5f54c967d5e44",
+                  "param_id": ""
+                },
+                {
+                  "qname": "FixedHeight",
+                  "type": "content",
+                  "value": true,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Disabled",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Группа_кнопок_Решение_клиента.Buttons",
+                  "type": "content",
+                  "value": {
+                    "orientation": "horizontal",
+                    "float": "left",
+                    "collection": [
+                      {
+                        "index": 0.0,
+                        "name": "Согласие",
+                        "label": "Согласие клиента",
+                        "labelExpression": "",
+                        "isLabelExpr": false,
+                        "buttonstyle": "additional",
+                        "sendform": "no",
+                        "commitform": false,
+                        "rollbackform": false,
+                        "submitform": false,
+                        "saveform": false,
+                        "validateform": false,
+                        "visible": true,
+                        "disable": false,
+                        "tooltip": "",
+                        "tooltipExpression": "",
+                        "isTooltipExpr": false,
+                        "actionname": "",
+                        "hotKey": "",
+                        "tKey__label": "",
+                        "t__label": false,
+                        "tKey__tooltip": "",
+                        "t__tooltip": false,
+                        "typeWidth": "auto",
+                        "classname": ""
+                      },
+                      {
+                        "index": 0.0,
+                        "name": "Отказ",
+                        "label": "Отказ клиента",
+                        "labelExpression": "",
+                        "isLabelExpr": false,
+                        "buttonstyle": "additional",
+                        "sendform": "no",
+                        "commitform": false,
+                        "rollbackform": false,
+                        "submitform": false,
+                        "saveform": false,
+                        "validateform": false,
+                        "visible": true,
+                        "disable": false,
+                        "tooltip": "",
+                        "tooltipExpression": "",
+                        "isTooltipExpr": false,
+                        "actionname": "",
+                        "hotKey": "",
+                        "tKey__label": "",
+                        "t__label": false,
+                        "tKey__tooltip": "",
+                        "t__tooltip": false,
+                        "typeWidth": "auto",
+                        "classname": ""
+                      }
+                    ]
+                  },
+                  "param_id": ""
+                },
+                {
+                  "qname": "Группа_кнопок_Решение_клиента.Visible",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Согласование_с_клиентом_1.Visible",
+                  "type": "content",
+                  "value": false,
+                  "param_id": ""
+                },
+                {
+                  "qname": "Согласование_с_клиентом_1.заявка",
+                  "type": "context",
+                  "exprSegment": "s64a5594904ee7",
+                  "param_id": "Context5e69ce9dc450e"
+                },
+                {
+                  "qname": "Согласование_с_клиентом_1.задача_согласования",
+                  "type": "context",
+                  "exprSegment": "s64a5595604ee8",
+                  "param_id": "Context5e2526262074d"
+                },
+                {
+                  "qname": "Согласование_с_клиентом_1.только_просмотр",
+                  "type": "context",
+                  "exprSegment": "s64a5595c04ee9",
+                  "param_id": "Context5d4d1542013ae"
+                }
+              ],
+              "cells": [
+                {
+                  "title": "some_title",
+                  "css_classes": "",
+                  "is_vertical": true
+                },
+                {
+                  "name": "Кнопка_Сформировать_уведомление",
+                  "height": 54.0
+                },
+                {
+                  "name": "Файл_Уведомления",
+                  "height": 204.0
+                },
+                [
+                  {
+                    "title": "nested group",
+                    "css_classes": "",
+                    "is_vertical": false,
+                    "height": 54.0
+                  },
+                  {
+                    "name": "Дата_Дата_уведомления",
+                    "flexRate": 4.0,
+                    "width": 4.0
+                  },
+                  {
+                    "name": "Кнопка_Уведомление",
+                    "flexRate": 20.0,
+                    "width": 20.0
+                  }
+                ],
+                {
+                  "name": "Группа_кнопок_Решение_клиента",
+                  "height": 70.0
+                },
+                {
+                  "name": "Согласование_с_клиентом_1",
+                  "height": 521.0
+                }
+              ],
+              "cell_bindings": [
+                {
+                  "qname": "Кнопка_Сформировать_уведомление",
+                  "control_id": "ext_button.control"
+                },
+                {
+                  "qname": "Кнопка_Уведомление",
+                  "control_id": "ext_button.control"
+                },
+                {
+                  "qname": "Дата_Дата_уведомления",
+                  "control_id": "ext_date.control"
+                },
+                {
+                  "qname": "Файл_Уведомления",
+                  "control_id": "jq_attach_file.control"
+                },
+                {
+                  "qname": "Группа_кнопок_Решение_клиента",
+                  "control_id": "_buttonset.control"
+                },
+                {
+                  "qname": "Согласование_с_клиентом_1",
+                  "control_id": "Задача_заявки.Формы.Компоненты.Согласование_с_клиентом"
+                }
+              ],
+              "diagram": {
+                "groups": [],
+                "nodes": [],
+                "connectors": [],
+                "variables": [],
+                "formAttr": []
+              }
+            }
+          }
+        ],
+        "component": {
+          "context": {},
+          "param_bindings": [
+            {
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.MCell",
+              "type": "content",
+              "value": [
+                {
+                  "title": "Сведения по задаче",
+                  "index": 0.0,
+                  "name": "сведения",
+                  "isTitleExpr": false,
+                  "titleExpression": "",
+                  "indexTab": "",
+                  "indexTabExpression": "",
+                  "isIndexTabExpr": false,
+                  "tooltip": "",
+                  "tabId": "tab_5e7d71528b68f",
+                  "visible": true,
+                  "imgSize": 24.0,
+                  "img": "",
+                  "imgActive": "",
+                  "imgHover": "",
+                  "imgClick": "",
+                  "empty": "",
+                  "tKey__title": "",
+                  "t__title": false,
+                  "tKey__tooltip": "",
+                  "t__tooltip": false,
+                  "minWidth": 100.0,
+                  "maxWidth": 500.0
+                },
+                {
+                  "title": "Решение по задаче",
+                  "index": 1.0,
+                  "name": "решение_по_задаче",
+                  "isTitleExpr": false,
+                  "titleExpression": "",
+                  "indexTab": "",
+                  "indexTabExpression": "",
+                  "isIndexTabExpr": false,
+                  "tooltip": "",
+                  "tabId": "tab_5e7d71c78b813",
+                  "visible": true,
+                  "imgSize": 24.0,
+                  "img": "",
+                  "imgActive": "",
+                  "imgHover": "",
+                  "imgClick": "",
+                  "empty": "",
+                  "tKey__title": "",
+                  "t__title": false,
+                  "tKey__tooltip": "",
+                  "t__tooltip": false,
+                  "minWidth": 100.0,
+                  "maxWidth": 500.0
+                }
+              ],
+              "param_id": ""
+            },
+            {
+              "qname": "FixedHeight",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            },
+            {
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.SizeOfContent",
+              "type": "content",
+              "value": false,
+              "param_id": ""
+            }
+          ],
+          "cells": [
+            {
+              "title": "some_title",
+              "css_classes": "",
+              "is_vertical": true
+            },
+            {
+              "name": "Контейнер_с_вкладками_Решение_по_задаче",
+              "height": 3210.0
+            }
+          ],
+          "cell_bindings": [
+            {
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.сведения",
+              "control_id": "Кредитный_комитет.Формы.Информирование_клиента.inplace_control_5e7c8593e674c"
+            },
+            {
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче",
+              "control_id": "ext_htabs.control"
+            },
+            {
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче",
+              "control_id": "Основной_интерфейс.Формы.Кредитный_комитет.Информирование_клиента.inplace_control_5e7d71d58b814"
+            }
+          ],
+          "diagram": {
+            "event_bindings": [
+              {
+                "id": "Event5e7d77c58b99b",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Уведомление.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Уведомление",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "widget": "Кнопка_Уведомление",
+                  "widgetType": "Кнопка",
+                  "actionArgs": []
+                },
+                "nodeId": "uuid5e7d77c58b99c4.04706394",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event5e7d81748c7a8",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Сформировать_уведомление.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Сформировать_уведомление",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "widget": "Кнопка_Сформировать_уведомление",
+                  "widgetType": "Кнопка",
+                  "actionArgs": []
+                },
+                "nodeId": "uuid5e7d81748c7a91.04583877",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event5e7d82ab8cb03",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Дата_Дата_уведомления.on_change",
+                "startAction": {
+                  "action": "on_change",
+                  "dispAction": "Смена_значения",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "значение",
+                      "nameEN": "value"
+                    },
+                    {
+                      "type": "string",
+                      "nameRU": "старое_значение",
+                      "nameEN": "previous_value"
+                    }
+                  ],
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Дата_Дата_уведомления",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "widget": "Дата_Дата_уведомления",
+                  "widgetType": "Дата"
+                },
+                "nodeId": "uuid5e7d82ab8cb047.64315656",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event5f54c9f5d5e4f",
+                "name": "on_before_render",
+                "startAction": {
+                  "action": "on_before_render",
+                  "dispAction": "ПередЗагрузкой",
+                  "fullname": "",
+                  "path": [],
+                  "widget": "",
+                  "widgetType": "Форма",
+                  "actionArgs": []
+                },
+                "nodeId": "uuid5f54c9f5d5e502.35997102",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false,
+                "isScript": true,
+                "contextProperty": "beforeRender"
+              },
+              {
+                "id": "Event647f4c1c72303",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Группа_кнопок_Решение_клиента.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "имя_кнопки",
+                      "nameEN": "button_name"
+                    }
+                  ],
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Группа_кнопок_Решение_клиента",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "widget": "Группа_кнопок_Решение_клиента",
+                  "widgetType": "Группа кнопок"
+                },
+                "nodeId": "uuid647f4c1c723044.80671407",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event64886d438087c",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.сведения.Работа_с_задачей.on_user_event",
+                "startAction": {
+                  "action": "on_user_event",
+                  "dispAction": "Пользовательское_событие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "наименование",
+                      "nameEN": "name"
+                    },
+                    {
+                      "type": "object",
+                      "nameRU": "данные",
+                      "nameEN": "data"
+                    }
+                  ],
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.сведения.Работа_с_задачей.",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.сведения",
+                    "Работа_с_задачей"
+                  ],
+                  "widget": "",
+                  "widgetType": "Форма"
+                },
+                "nodeId": "uuid64886d438087d0.84134274",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              },
+              {
+                "id": "Event64ca532c2fb45",
+                "name": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Согласование_с_клиентом_1.Группа_кнопок_согласования.on_click",
+                "startAction": {
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "имя_кнопки",
+                      "nameEN": "button_name"
+                    }
+                  ],
+                  "fullname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Согласование_с_клиентом_1.Группа_кнопок_согласования",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче",
+                    "Согласование_с_клиентом_1"
+                  ],
+                  "widget": "Группа_кнопок_согласования",
+                  "widgetType": "Группа кнопок"
+                },
+                "nodeId": "uuid64ca53892fb551.61378217",
+                "active": true,
+                "multiple": false,
+                "formattrsCacheDisabled": false
+              }
+            ],
+            "groups": [],
+            "nodes": [
+              {
+                "id": "uuid5e7d77c58b99c4.04706394",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid5e7d77c58b99c4.04706394",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "widget": "Кнопка_Уведомление",
+                  "widgetType": "Кнопка",
+                  "widgetTypeView": "Кнопка",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "actionArgs": []
+                },
+                "position": {
+                  "x": 402.0,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d77c58b99e7.56152170"
+                ],
+                "prevIdConnectors": [
+                  "uuid650171874663c7.42189856"
+                ]
+              },
+              {
+                "id": "uuid5e7d77c98b9a00.98937315",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid5e7d77c98b9a00.98937315",
+                  "type": "udms",
+                  "name": "Сервер",
+                  "path": [],
+                  "scriptId": "uuid5e7d782b8b9a44.71019378",
+                  "scriptName": "Сценарий (Сервер)",
+                  "inputs": [],
+                  "outputs": [
+                    {
+                      "id": "uuid5eaa81715cf674.99698190",
+                      "value": "request"
+                    },
+                    {
+                      "id": "uuid5ebe67632ef477.59371304",
+                      "value": "flag"
+                    },
+                    {
+                      "id": "uuid64a558f704bc24.08441110",
+                      "value": "soglasovanie"
+                    }
+                  ]
+                },
+                "position": {
+                  "x": 397.9999999999999,
+                  "y": 284.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d77c98b9a11.87503923",
+                  "uuid5ebe679a2ef542.59465101",
+                  "uuid64a558fd04bc99.14974316"
+                ],
+                "prevIdConnectors": [
+                  "uuid5e7d77c58b99e7.56152170"
+                ]
+              },
+              {
+                "id": "uuid5eaa81765cf6b6.21145758",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid5eaa81765cf6b6.21145758",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "code": "var loanApps \u003d [];\r\nloanApps.push(request);\r\nuserEventDataSend \u003d {\r\n    loanAppsToClose : []\r\n};\r\nuserEventDataSend.loanAppsToClose \u003d loanApps;\r\n\r\n// 16.05.23 - вызов универсального события\r\n вызватьПользовательскоеСобытие(\"CloseLoanAppProcess\", userEventDataSend);\r\n/*\r\nвызватьПользовательскоеСобытие(\r\n    \u0027перейти_на_пункт_меню\u0027, \r\n    {\r\n        item_name: \"main\",\r\n        data_send: {\r\n            loanAppsToClose \u003d loanApps\r\n        }\r\n    }\r\n);\r\n*/\r\n\r\nFORM.alert(\u0027Внимание\u0027, \u0027Процесс рассмотрения заявки завершен\u0027);",
+                  "scriptName": "Сценарий (Форма) (3)"
+                },
+                "position": {
+                  "x": 200.0,
+                  "y": 462.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d85db8cb411.91072632"
+                ],
+                "prevIdConnectors": [
+                  "uuid5e7d77c98b9a11.87503923"
+                ]
+              },
+              {
+                "id": "uuid5ed857fb4218d2.48011019",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid5ed857fb4218d2.48011019"
+                },
+                "position": {
+                  "x": 200.31269559021734,
+                  "y": 580.9161806663147
+                },
+                "prevIdConnectors": [
+                  "uuid5e7d85db8cb411.91072632"
+                ]
+              },
+              {
+                "id": "uuid6461a9efa55962.02683189",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid6461a9efa55962.02683189",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid6461a9efa55949.78951097",
+                  "code": "// 16.05.23 - вызов универсального события\nвызватьПользовательскоеСобытие(\n    \u0027перейти_на_пункт_меню\u0027, \n    {\n        item_name: \"main\"\n    }\n);",
+                  "scriptName": "Сценарий (Форма) (5)"
+                },
+                "position": {
+                  "x": 493.9999999999998,
+                  "y": 463.0
+                },
+                "nextIdConnectors": [
+                  "uuid5ebe67e82ef5b2.62783524"
+                ],
+                "prevIdConnectors": [
+                  "uuid5ebe679a2ef542.59465101"
+                ]
+              },
+              {
+                "id": "uuid5e7d77c58b99d5.10195983",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid5e7d77c58b99d5.10195983"
+                },
+                "position": {
+                  "x": 495.31269559021734,
+                  "y": 729.9161806663147
+                },
+                "prevIdConnectors": [
+                  "uuid5ebe67e82ef5b2.62783524"
+                ]
+              },
+              {
+                "id": "uuid64a5591904bd59.94323164",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid64a5591904bd59.94323164",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid64a5591904bd35.50202845",
+                  "scriptName": "Сценарий (Форма) (4)",
+                  "code": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Согласование_с_клиентом_1.Показать();"
+                },
+                "position": {
+                  "x": 773.9999999999998,
+                  "y": 466.0
+                },
+                "nextIdConnectors": [
+                  "uuid64a5591904bd66.57049042"
+                ],
+                "prevIdConnectors": [
+                  "uuid64a558fd04bc99.14974316"
+                ]
+              },
+              {
+                "id": "uuid64a558fd04bc73.62990236",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid64a558fd04bc73.62990236"
+                },
+                "position": {
+                  "x": 773.9999999999998,
+                  "y": 584.0
+                },
+                "prevIdConnectors": [
+                  "uuid64a5591904bd66.57049042"
+                ]
+              },
+              {
+                "id": "uuid5e7d81748c7a91.04583877",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid5e7d81748c7a91.04583877",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "widget": "Кнопка_Сформировать_уведомление",
+                  "widgetType": "Кнопка",
+                  "widgetTypeView": "Кнопка",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ],
+                  "actionArgs": []
+                },
+                "position": {
+                  "x": 1108.9999999999998,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d81748c7ab5.56154105"
+                ],
+                "prevIdConnectors": [
+                  "uuid650171874663d0.81219677"
+                ]
+              },
+              {
+                "id": "uuid5e7d81778c7b51.28181092",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid5e7d81778c7b51.28181092",
+                  "type": "udms",
+                  "name": "Сервер",
+                  "path": [],
+                  "scriptId": "uuid5e7d81b28c7bd4.85928080",
+                  "scriptName": "Сценарий (Сервер) (2)",
+                  "inputs": [],
+                  "outputs": [
+                    {
+                      "id": "uuid5ec3b742ac33e6.82973845",
+                      "value": "number_task"
+                    }
+                  ]
+                },
+                "position": {
+                  "x": 1108.9999999999998,
+                  "y": 300.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d81778c7b69.09968385"
+                ],
+                "prevIdConnectors": [
+                  "uuid5e7d81748c7ab5.56154105"
+                ]
+              },
+              {
+                "id": "uuid5e7d81798c7b95.77923221",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid5e7d81798c7b95.77923221",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "code": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Файл_Уведомления.Перезагрузить_свойства([\u0027Поле_файла\u0027]);\r\n\r\nКонтейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Файл_Уведомления.Показать();\r\n    Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Дата_Дата_уведомления.Показать();\r\n    \r\n    if (FORM.attr(\"код_этапа\") \u003d\u003d \u0027пэ\u0027) Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Группа_кнопок_Решение_клиента.Показать(); \r\n    else Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Уведомление.Показать();\r\n    \r\n    Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Файл_Уведомления.Поле_названия \u003d \"Уведомление клиента по задаче \" + number_task +  \".doc\" ;\r\n    Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Файл_Уведомления.Надпись \u003d \"Уведомление клиента\";\r\n    console.log(Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Файл_Уведомления.Поле_файла);\r\n",
+                  "scriptName": "Сценарий (Форма)"
+                },
+                "position": {
+                  "x": 1108.9999999999998,
+                  "y": 450.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d81798c7ba7.64072266"
+                ],
+                "prevIdConnectors": [
+                  "uuid5e7d81778c7b69.09968385"
+                ]
+              },
+              {
+                "id": "uuid5e7d81748c7aa3.20459848",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid5e7d81748c7aa3.20459848"
+                },
+                "position": {
+                  "x": 1108.9999999999998,
+                  "y": 600.0
+                },
+                "prevIdConnectors": [
+                  "uuid5e7d81798c7ba7.64072266"
+                ]
+              },
+              {
+                "id": "uuid5e7d82ab8cb047.64315656",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid5e7d82ab8cb047.64315656",
+                  "action": "on_change",
+                  "dispAction": "Смена_значения",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "значение",
+                      "nameEN": "value"
+                    },
+                    {
+                      "type": "string",
+                      "nameRU": "старое_значение",
+                      "nameEN": "previous_value"
+                    }
+                  ],
+                  "widget": "Дата_Дата_уведомления",
+                  "widgetType": "Дата",
+                  "widgetTypeView": "Дата",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ]
+                },
+                "position": {
+                  "x": 1443.9999999999998,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d82ab8cb065.75538919"
+                ],
+                "prevIdConnectors": [
+                  "uuid650171874663e4.04129243"
+                ]
+              },
+              {
+                "id": "uuid5e7d82af8cb083.93364403",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid5e7d82af8cb083.93364403",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "code": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Кнопка_Уведомление.Недоступно \u003d !Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче.Дата_Дата_уведомления.Значение",
+                  "scriptName": "Сценарий (Форма) (2)"
+                },
+                "position": {
+                  "x": 1443.9999999999998,
+                  "y": 300.0
+                },
+                "nextIdConnectors": [
+                  "uuid5e7d82af8cb099.11540880"
+                ],
+                "prevIdConnectors": [
+                  "uuid5e7d82ab8cb065.75538919"
+                ]
+              },
+              {
+                "id": "uuid5e7d82ab8cb051.90244797",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid5e7d82ab8cb051.90244797"
+                },
+                "position": {
+                  "x": 1443.9999999999998,
+                  "y": 450.0
+                },
+                "prevIdConnectors": [
+                  "uuid5e7d82af8cb099.11540880"
+                ]
+              },
+              {
+                "id": "uuid5f54c9f5d5e502.35997102",
+                "type": "EventScriptNode",
+                "content": {
+                  "uuid": "uuid5f54c9f5d5e502.35997102",
+                  "action": "on_before_render",
+                  "dispAction": "ПередЗагрузкой",
+                  "widget": "",
+                  "widgetType": "Форма",
+                  "widgetTypeView": "Форма",
+                  "path": [],
+                  "scriptId": "eventScript_beforeRender",
+                  "actionArgs": [],
+                  "scriptData": {
+                    "id": "eventScript_beforeRender",
+                    "context": [],
+                    "script": "udm:(ifnull(только_просмотр) and (только_просмотр :\u003d false, true));\nudm:(код_этапа :\u003d задача.заявка.этап.код);"
+                  }
+                },
+                "position": {
+                  "x": 1778.9999999999998,
+                  "y": 150.0
+                },
+                "prevIdConnectors": [
+                  "uuid650171874663f9.70268195"
+                ]
+              },
+              {
+                "id": "uuid647f4c1c723044.80671407",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid647f4c1c723044.80671407",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "имя_кнопки",
+                      "nameEN": "button_name",
+                      "value": "имя_кнопки"
+                    }
+                  ],
+                  "widget": "Группа_кнопок_Решение_клиента",
+                  "widgetType": "Группа кнопок",
+                  "widgetTypeView": "Группа кнопок",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче"
+                  ]
+                },
+                "position": {
+                  "x": 2393.4249249599998,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid647f4c1c723065.58671006",
+                  "uuid647f4c5c723183.70124507"
+                ],
+                "prevIdConnectors": [
+                  "uuid65017187466408.20143140"
+                ]
+              },
+              {
+                "id": "uuid647f4cd5723224.93225721",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid647f4cd5723224.93225721",
+                  "type": "udms",
+                  "name": "Сервер",
+                  "path": [],
+                  "scriptId": "uuid647f4cd5723205.70955991",
+                  "inputs": [],
+                  "outputs": [
+                    {
+                      "id": "uuid647f51877237b2.77205197",
+                      "value": "request"
+                    }
+                  ],
+                  "scriptName": "Сценарий (Сервер) (3)"
+                },
+                "position": {
+                  "x": 2114.0,
+                  "y": 307.2811562
+                },
+                "nextIdConnectors": [
+                  "uuid647f4cd5723236.49361526"
+                ],
+                "prevIdConnectors": [
+                  "uuid647f4c1c723065.58671006"
+                ]
+              },
+              {
+                "id": "uuid647f4f247235b5.35139515",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid647f4f247235b5.35139515",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid647f4f24723591.75276812",
+                  "code": "вызватьПользовательскоеСобытие(\n    \u0027перейти_на_пункт_меню\u0027, \n    {\n        item_name: \"main\"\n    }\n);",
+                  "scriptName": "Сценарий (Форма) (6)"
+                },
+                "position": {
+                  "x": 2114.0,
+                  "y": 457.2811561999998
+                },
+                "nextIdConnectors": [
+                  "uuid647f4f247235c6.82742958"
+                ],
+                "prevIdConnectors": [
+                  "uuid647f4cd5723236.49361526"
+                ]
+              },
+              {
+                "id": "uuid647f4c1c723058.96018492",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid647f4c1c723058.96018492"
+                },
+                "position": {
+                  "x": 2114.0,
+                  "y": 607.2811561999998
+                },
+                "prevIdConnectors": [
+                  "uuid647f4f247235c6.82742958"
+                ]
+              },
+              {
+                "id": "uuid647f4cdb723273.48216930",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid647f4cdb723273.48216930",
+                  "type": "udms",
+                  "name": "Сервер",
+                  "path": [],
+                  "scriptId": "uuid647f4cdb723256.73535878",
+                  "inputs": [],
+                  "outputs": [
+                    {
+                      "id": "uuid647f51d8723865.70597942",
+                      "value": "request"
+                    }
+                  ],
+                  "scriptName": "Сценарий (Сервер) (4)"
+                },
+                "position": {
+                  "x": 2709.4249249599998,
+                  "y": 318.0
+                },
+                "nextIdConnectors": [
+                  "uuid647f4cdb723280.74026693"
+                ],
+                "prevIdConnectors": [
+                  "uuid647f4c5c723183.70124507"
+                ]
+              },
+              {
+                "id": "uuid647f4e7f723373.73718763",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid647f4e7f723373.73718763",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid647f4e7f723352.73146269",
+                  "code": "var loanApps \u003d [];\nloanApps.push(request);\nuserEventDataSend \u003d {\n    loanAppsToClose : []\n};\nuserEventDataSend.loanAppsToClose \u003d loanApps;\n\n// 16.05.23 - вызов универсального события\n вызватьПользовательскоеСобытие(\"CloseLoanAppProcess\", userEventDataSend);",
+                  "scriptName": "Сценарий (Форма) (7)"
+                },
+                "position": {
+                  "x": 2709.4249249599998,
+                  "y": 468.0
+                },
+                "nextIdConnectors": [
+                  "uuid647f4e7f723387.48082834"
+                ],
+                "prevIdConnectors": [
+                  "uuid647f4cdb723280.74026693"
+                ]
+              },
+              {
+                "id": "uuid647f4c5c723164.80290356",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid647f4c5c723164.80290356"
+                },
+                "position": {
+                  "x": 2709.4249249599998,
+                  "y": 618.0
+                },
+                "prevIdConnectors": [
+                  "uuid647f4e7f723387.48082834"
+                ]
+              },
+              {
+                "id": "uuid64886d438087d0.84134274",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid64886d438087d0.84134274",
+                  "action": "on_user_event",
+                  "dispAction": "Пользовательское_событие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "наименование",
+                      "nameEN": "name",
+                      "value": "user_event"
+                    },
+                    {
+                      "type": "object",
+                      "nameRU": "данные",
+                      "nameEN": "data"
+                    }
+                  ],
+                  "widget": "",
+                  "widgetType": "Форма",
+                  "widgetTypeView": "Форма",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.сведения",
+                    "Работа_с_задачей"
+                  ]
+                },
+                "position": {
+                  "x": 3044.8498499199995,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid64886d438087f0.08778721"
+                ],
+                "prevIdConnectors": [
+                  "uuid65017187466412.41226921"
+                ]
+              },
+              {
+                "id": "uuid64886ce8808733.36377165",
+                "type": "WidgetNode",
+                "content": {
+                  "uuid": "uuid64886ce8808733.36377165",
+                  "type": "method",
+                  "fullText": "вызватьПользовательскоеСобытие()",
+                  "path": [],
+                  "methodName": "fireUserEvent",
+                  "methodQName": "вызватьПользовательскоеСобытие",
+                  "widget": "Информирование_клиента",
+                  "widgetType": "form",
+                  "supportWaitingHandlers": false,
+                  "arguments": [
+                    {
+                      "type": "string",
+                      "value": "\u0027досье\u0027",
+                      "nameRU": "наименование",
+                      "nameEN": "name"
+                    },
+                    {
+                      "type": "object",
+                      "nameRU": "данные",
+                      "nameEN": "data"
+                    }
+                  ],
+                  "widgetTypeView": "Форма"
+                },
+                "position": {
+                  "x": 3044.4249249599998,
+                  "y": 297.0
+                },
+                "nextIdConnectors": [
+                  "uuid64886ce8808740.95717775"
+                ],
+                "prevIdConnectors": [
+                  "uuid64886d438087f0.08778721"
+                ]
+              },
+              {
+                "id": "uuid5eaa80bb5cf503.29677772",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid5eaa80bb5cf503.29677772"
+                },
+                "position": {
+                  "x": 3044.4249249599998,
+                  "y": 447.0
+                },
+                "prevIdConnectors": [
+                  "uuid64886ce8808740.95717775"
+                ]
+              },
+              {
+                "id": "uuid64ca53892fb551.61378217",
+                "type": "EventNode",
+                "content": {
+                  "uuid": "uuid64ca53892fb551.61378217",
+                  "action": "on_click",
+                  "dispAction": "Нажатие",
+                  "actionArgs": [
+                    {
+                      "type": "string",
+                      "nameRU": "имя_кнопки",
+                      "nameEN": "button_name"
+                    }
+                  ],
+                  "widget": "Группа_кнопок_согласования",
+                  "widgetType": "Группа кнопок",
+                  "widgetTypeView": "Группа кнопок",
+                  "path": [
+                    "Контейнер_с_вкладками_Решение_по_задаче",
+                    "Tabs.решение_по_задаче",
+                    "Согласование_с_клиентом_1"
+                  ]
+                },
+                "position": {
+                  "x": 3379.8498499199995,
+                  "y": 150.0
+                },
+                "nextIdConnectors": [
+                  "uuid64ca53892fb577.40465563"
+                ],
+                "prevIdConnectors": [
+                  "uuid65017187466420.96542472"
+                ]
+              },
+              {
+                "id": "uuid64ca53912fb5a4.27682927",
+                "type": "ScriptNode",
+                "content": {
+                  "uuid": "uuid64ca53912fb5a4.27682927",
+                  "type": "vcm",
+                  "name": "Форма",
+                  "path": [],
+                  "scriptId": "uuid64ca53912fb582.75358563",
+                  "code": "вызватьПользовательскоеСобытие(\n    \u0027перейти_на_пункт_меню\u0027, \n    {\n        item_name: \"main\"\n    }\n);",
+                  "scriptName": "Сценарий (Форма) (8)"
+                },
+                "position": {
+                  "x": 3379.8498499199995,
+                  "y": 300.0
+                },
+                "nextIdConnectors": [
+                  "uuid64ca53912fb5b6.68815911"
+                ],
+                "prevIdConnectors": [
+                  "uuid64ca53892fb577.40465563"
+                ]
+              },
+              {
+                "id": "uuid64ca53892fb567.97455849",
+                "type": "FinishNode",
+                "content": {
+                  "uuid": "uuid64ca53892fb567.97455849"
+                },
+                "position": {
+                  "x": 3379.8498499199995,
+                  "y": 450.0
+                },
+                "prevIdConnectors": [
+                  "uuid64ca53912fb5b6.68815911"
+                ]
+              }
+            ],
+            "connectors": [
+              {
+                "id": "uuid5e7d77c58b99e7.56152170",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d77c58b99e7.56152170"
+                },
+                "from": "uuid5e7d77c58b99c4.04706394",
+                "to": "uuid5e7d77c98b9a00.98937315",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d77c98b9a11.87503923",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d77c98b9a11.87503923",
+                  "condition": "flag",
+                  "type": "or",
+                  "order": 3.0,
+                  "scriptName": "Переход (2)"
+                },
+                "from": "uuid5e7d77c98b9a00.98937315",
+                "to": "uuid5eaa81765cf6b6.21145758",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d85db8cb411.91072632",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d85db8cb411.91072632"
+                },
+                "from": "uuid5eaa81765cf6b6.21145758",
+                "to": "uuid5ed857fb4218d2.48011019",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5ebe679a2ef542.59465101",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5ebe679a2ef542.59465101",
+                  "condition": "!flag",
+                  "type": "or",
+                  "order": 2.0,
+                  "scriptName": "Переход (3)"
+                },
+                "from": "uuid5e7d77c98b9a00.98937315",
+                "to": "uuid6461a9efa55962.02683189",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5ebe67e82ef5b2.62783524",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5ebe67e82ef5b2.62783524"
+                },
+                "from": "uuid6461a9efa55962.02683189",
+                "to": "uuid5e7d77c58b99d5.10195983",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64a558fd04bc99.14974316",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64a558fd04bc99.14974316",
+                  "condition": "soglasovanie",
+                  "type": "or",
+                  "order": 1.0,
+                  "scriptName": "Переход (5)"
+                },
+                "from": "uuid5e7d77c98b9a00.98937315",
+                "to": "uuid64a5591904bd59.94323164",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64a5591904bd66.57049042",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64a5591904bd66.57049042"
+                },
+                "from": "uuid64a5591904bd59.94323164",
+                "to": "uuid64a558fd04bc73.62990236",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d81748c7ab5.56154105",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d81748c7ab5.56154105"
+                },
+                "from": "uuid5e7d81748c7a91.04583877",
+                "to": "uuid5e7d81778c7b51.28181092",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d81778c7b69.09968385",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d81778c7b69.09968385"
+                },
+                "from": "uuid5e7d81778c7b51.28181092",
+                "to": "uuid5e7d81798c7b95.77923221",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d81798c7ba7.64072266",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d81798c7ba7.64072266"
+                },
+                "from": "uuid5e7d81798c7b95.77923221",
+                "to": "uuid5e7d81748c7aa3.20459848",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d82ab8cb065.75538919",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d82ab8cb065.75538919"
+                },
+                "from": "uuid5e7d82ab8cb047.64315656",
+                "to": "uuid5e7d82af8cb083.93364403",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid5e7d82af8cb099.11540880",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid5e7d82af8cb099.11540880"
+                },
+                "from": "uuid5e7d82af8cb083.93364403",
+                "to": "uuid5e7d82ab8cb051.90244797",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4c1c723065.58671006",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4c1c723065.58671006",
+                  "condition": "имя_кнопки \u003d\u003d \u0027Согласие\u0027",
+                  "type": "or",
+                  "order": 1.0,
+                  "scriptName": "Переход (4)"
+                },
+                "from": "uuid647f4c1c723044.80671407",
+                "to": "uuid647f4cd5723224.93225721",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4cd5723236.49361526",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4cd5723236.49361526"
+                },
+                "from": "uuid647f4cd5723224.93225721",
+                "to": "uuid647f4f247235b5.35139515",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4f247235c6.82742958",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4f247235c6.82742958"
+                },
+                "from": "uuid647f4f247235b5.35139515",
+                "to": "uuid647f4c1c723058.96018492",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4c5c723183.70124507",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4c5c723183.70124507",
+                  "condition": "",
+                  "type": "or",
+                  "order": 2.0,
+                  "scriptName": ""
+                },
+                "from": "uuid647f4c1c723044.80671407",
+                "to": "uuid647f4cdb723273.48216930",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4cdb723280.74026693",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4cdb723280.74026693"
+                },
+                "from": "uuid647f4cdb723273.48216930",
+                "to": "uuid647f4e7f723373.73718763",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid647f4e7f723387.48082834",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid647f4e7f723387.48082834"
+                },
+                "from": "uuid647f4e7f723373.73718763",
+                "to": "uuid647f4c5c723164.80290356",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64886d438087f0.08778721",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64886d438087f0.08778721",
+                  "condition": "user_event \u003d\u003d \u0027досье\u0027",
+                  "type": "",
+                  "order": "",
+                  "scriptName": "Переход"
+                },
+                "from": "uuid64886d438087d0.84134274",
+                "to": "uuid64886ce8808733.36377165",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64886ce8808740.95717775",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64886ce8808740.95717775"
+                },
+                "from": "uuid64886ce8808733.36377165",
+                "to": "uuid5eaa80bb5cf503.29677772",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64ca53892fb577.40465563",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64ca53892fb577.40465563"
+                },
+                "from": "uuid64ca53892fb551.61378217",
+                "to": "uuid64ca53912fb5a4.27682927",
+                "contentPositions": {}
+              },
+              {
+                "id": "uuid64ca53912fb5b6.68815911",
+                "type": "defaultConnector",
+                "content": {
+                  "uuid": "uuid64ca53912fb5b6.68815911"
+                },
+                "from": "uuid64ca53912fb5a4.27682927",
+                "to": "uuid64ca53892fb567.97455849",
+                "contentPositions": {}
+              }
+            ],
+            "variables": [
+              {
+                "name": "credits",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "user_event",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "flag",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "request",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "number_task",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "userEventDataSend",
+                "isGlobal": true,
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "имя_кнопки",
+                "defaultValue": "",
+                "description": ""
+              },
+              {
+                "name": "soglasovanie",
+                "defaultValue": "",
+                "description": ""
+              }
+            ],
+            "formAttr": [
+              {
+                "name": "задача",
+                "id": "Context5e7d71318b689"
+              },
+              {
+                "name": "файл",
+                "id": "Context5e7d816e8c7a5"
+              },
+              {
+                "name": "только_просмотр",
+                "id": "Context5f54c6d0d3c79"
+              },
+              {
+                "name": "код_этапа",
+                "id": "Context647f47cc4895b"
+              }
+            ]
+          }
+        },
+        "jsClientLibraries": [],
+        "contextTree": {
+          "id": "036aa8cd-87a4-46c1-8d8a-4bf22e7ffc27",
+          "qname": "root",
+          "lazyLoad": false,
+          "context": {},
+          "exprSegments": [
+            {
+              "id": "s5e7d71318b68a",
+              "qname": "formattr_Context5e7d71318b689"
+            },
+            {
+              "id": "s5e7d816e8c7a6",
+              "qname": "formattr_Context5e7d816e8c7a5"
+            },
+            {
+              "id": "s5f54cbb2d68ff",
+              "qname": "formattr_Context5f54c6d0d3c79"
+            },
+            {
+              "id": "s647f47cc4895c",
+              "qname": "formattr_Context647f47cc4895b"
+            }
+          ],
+          "children": [
+            {
+              "id": "node5e7d71d58b815",
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.решение_по_задаче",
+              "lazyLoad": false,
+              "context": {},
+              "expressions": [
+                {
+                  "id": "e5f54c967d5e44",
+                  "qname": "Кнопка_Сформировать_уведомление.Disabled"
+                },
+                {
+                  "id": "e5e7d8fa58cc4d",
+                  "qname": "Файл_Уведомления.Content"
+                }
+              ],
+              "exprSegments": [
+                {
+                  "id": "s64a5594904ee7",
+                  "qname": "Согласование_с_клиентом_1.заявка"
+                },
+                {
+                  "id": "s64a5595604ee8",
+                  "qname": "Согласование_с_клиентом_1.задача_согласования"
+                },
+                {
+                  "id": "s64a5595c04ee9",
+                  "qname": "Согласование_с_клиентом_1.только_просмотр"
+                }
+              ],
+              "children": [
+                {
+                  "id": "transform_node5e7d794e8bfc9",
+                  "qname": "Файл_Уведомления",
+                  "context": {},
+                  "isTransformNode": true,
+                  "separateFormTx": false,
+                  "enUDMLSupport": false
+                },
+                {
+                  "isNested": true,
+                  "id": "node6501718445eba",
+                  "qname": "Согласование_с_клиентом_1",
+                  "control_id": "Задача_заявки.Формы.Компоненты.Согласование_с_клиентом"
+                }
+              ],
+              "separateFormTx": false,
+              "enUDMLSupport": false
+            },
+            {
+              "id": "node5e7c8593e674d",
+              "qname": "Контейнер_с_вкладками_Решение_по_задаче.Tabs.сведения",
+              "lazyLoad": false,
+              "context": {},
+              "exprSegments": [
+                {
+                  "id": "s5e7d71388b68c",
+                  "qname": "Работа_с_задачей.задача"
+                },
+                {
+                  "id": "s5e7d71a18b80c",
+                  "qname": "Работа_с_задачей.только_просмотр"
+                }
+              ],
+              "children": [
+                {
+                  "isNested": true,
+                  "id": "node6501718445d59",
+                  "qname": "Работа_с_задачей",
+                  "control_id": "Экспертиза.Формы.Компоненты.Работа_с_задачей"
+                }
+              ],
+              "separateFormTx": false,
+              "enUDMLSupport": false
+            }
+          ],
+          "separateFormTx": false,
+          "enUDMLSupport": false,
+          "beforeRenderId": "eventScript_beforeRender"
+        },
+        "vcmDialect": "1"
+      },
+      "layerName": "null",
+      "qualifiedName": "null",
+      "translate": "{}",
+      "udmDialect": "V3",
+      "udmScripts": {
+        "content": [
+          {
+            "id": "eventScript_beforeRender",
+            "context": [],
+            "script": "udm:(ifnull(только_просмотр) and (только_просмотр :\u003d false, true));\nudm:(код_этапа :\u003d задача.заявка.этап.код);"
+          },
+          {
+            "id": "uuid5e7d782b8b9a44.71019378",
+            "context": [
+              {
+                "id": "uuid5eaa81715cf674.99698190",
+                "name": "кредитная_заявка",
+                "type": "UDM",
+                "udm_type": "Кредитная_заявка.Кредитная_заявка",
+                "is_collection": false
+              },
+              {
+                "id": "uuid5ebe67632ef477.59371304",
+                "name": "флаг",
+                "type": "bool",
+                "udm_type": "",
+                "is_collection": false
+              },
+              {
+                "id": "uuid64a558f704bc24.08441110",
+                "name": "soglasovanie",
+                "type": "bool",
+                "udm_type": "",
+                "is_collection": false
+              }
+            ],
+            "script": "Log4JS.log(\"нажата кнопка уведомление\", \"check_path.log\");\r\nudm:(флаг :\u003d false);\r\nudm:(soglasovanie :\u003d false);\r\n\r\nvar res_cred \u003d String(udm:(задача.заявка.решение.вид.код));\r\nvar res_cred_description \u003d String(udm:(задача.заявка.решение.вид.значение));\r\nswitch(res_cred) {\r\n    case \"вопрос_не_принят\":\r\n    case \"отрицательное_рул\":\r\n    case \"вопрос_не_принят_правление\":\r\n        Log4JS.log(res_cred, \"check_path.log\");\r\n        udm:(задача.заявка.статус :\u003d Кредитная_заявка:Статус_заявки:по_коду(\"отклонена\")[0]);\r\n        udm:(задача.заявка.архивная :\u003d true);\r\n        udm:(флаг :\u003d true);   \r\n        var new_state_task \u003d udm:(Задача:Статус_задачи:по_коду(\"отмена\")[0]);\r\n        //Все актуальные задачи заявки\r\n        var application_tasks \u003d udm:(Задача:Задача:по_заявке(задача.заявка));\r\n        for (var i \u003d application_tasks.length - 1; i \u003e\u003d 0; --i) {\r\n            var task \u003d application_tasks[i];\r\n            var state_task \u003d String(task.статус);\r\n            if (!state_task.код || [\u0027выполнена\u0027, \u0027выполнена_исполнителем\u0027, \u0027отмена\u0027].indexOf(state_task.код) \u003d\u003d -1) {\r\n                task.статус \u003d new_state_task;\r\n                task.дата_окончания \u003d udm:(now());\r\n                udm:(Задача:счетчик_просмотрен(js:Задача:Задача(task),  НД()));\r\n                udm:(Задача:создать_историю(js:Задача:Задача(task), js:Задача:Статус_задачи(new_state_task), js:string(res_cred_description), js:Задача:Задача(task).исполнитель, js:Задача:Задача(task).срок_исполнения));\r\n            }\r\n        }\r\n    break;\r\n    case \"вопрос_принят\":\r\n        Log4JS.log(res_cred, \"check_path.log\");\r\n        udm:(soglasovanie :\u003d true);\r\n    break;\r\n    case \"положительное_рул\":\r\n    case \"требуется_правление\":\r\n    case \"вопрос_принят_с_доработкой\":\r\n    case \"вопрос_принят_правление\":\r\n        Log4JS.log(res_cred, \"check_path.log\");\r\n        udm:(задача.заявка.статус :\u003d Кредитная_заявка:Статус_заявки:по_коду(\"передача_сопровод\")[0]);    \r\n        udm:(soglasovanie :\u003d true);    \r\n    break;\r\n    \r\n        //udm:(задача.заявка.статус :\u003d Кредитная_заявка:Статус_заявки:по_коду(\"корректировка_пр\")[0]);\r\n    //break;\r\n    case \"вернуть_на_доработку\":  \r\n        Log4JS.log(res_cred, \"check_path.log\");        \r\n        udm:(задача.заявка.статус :\u003d Кредитная_заявка:Статус_заявки:по_коду(\"экспертизы\")[0]);\r\n        udm:(задача.заявка.этап :\u003d Кредитная_заявка:Этап_рассмотрения:по_коду(\"экспертиза\")[0]);\r\n    break;  \r\n}\r\nudm:(кредитная_заявка :\u003d задача.заявка);\r\n//udm:(Задача:завершить_задачу(задача,\"Задача выполнена исполнителем\",НД()));\r\n\r\n\r\nLog4JS.log(udm:(флаг), \"check_path.log\");\r\n\r\n\r\n//Перевод заявки в архив, тк далее процесс еще не сделан\r\n/*\r\nif (udm:(флаг !\u003d true)) {\r\n    udm:(задача.заявка.статус :\u003d Кредитная_заявка:Статус_заявки:по_коду(\"сопровождение\")[0]);\r\n    udm:(задача.заявка.архивная :\u003d true);  \r\n    var new_state_task \u003d udm:(Задача:Статус_задачи:по_коду(\"отмена\")[0]);\r\n    //Все актуальные задачи заявки\r\n    var application_tasks \u003d udm:(Задача:Задача:по_заявке(задача.заявка));\r\n    for (var i \u003d application_tasks.length - 1; i \u003e\u003d 0; --i) {\r\n        var task \u003d application_tasks[i];\r\n        var state_task \u003d String(task.статус);\r\n        \r\n        if(!state_task.код || [\u0027выполнена\u0027, \u0027выполнена_исполнителем\u0027, \u0027отмена\u0027].indexOf(state_task.код) \u003d\u003d -1){\r\n            task.статус \u003d new_state_task;\r\n            task.дата_окончания \u003d udm:(now());\r\n            udm:(Задача:счетчик_просмотрен(js:Задача:Задача(task),  НД()));\r\n            udm:(Задача:создать_историю(js:Задача:Задача(task), js:Задача:Статус_задачи(new_state_task), \"Отказ клиента\", js:Задача:Задача(task).исполнитель, js:Задача:Задача(task).срок_исполнения));\r\n        }\r\n        \r\n    }\r\n    udm:(флаг :\u003d true);\r\n}\r\n*/"
+          },
+          {
+            "id": "uuid5e7d81b28c7bd4.85928080",
+            "context": [
+              {
+                "id": "uuid5ec3b742ac33e6.82973845",
+                "name": "номер_задачи",
+                "type": "string",
+                "udm_type": "",
+                "is_collection": false
+              }
+            ],
+            "script": "udm:(файл :\u003d ОТЧЕТ(\"Кредитный_комитет.Отчеты.Письмо_уведомление_заемщика\",задача.заявка,\"DOC\"));\r\nudm:(номер_задачи :\u003d задача.номер);"
+          },
+          {
+            "id": "uuid647f4cdb723256.73535878",
+            "context": [
+              {
+                "id": "uuid647f51d8723865.70597942",
+                "name": "кредитная_заявка",
+                "type": "UDM",
+                "udm_type": "Кредитная_заявка.Кредитная_заявка",
+                "is_collection": false
+              }
+            ],
+            "script": "udm:(Кредитная_заявка:завершить_заявку_с_отказом(задача.заявка, \u0027отказ_кл\u0027, НД()));\nudm:(кредитная_заявка :\u003d задача.заявка);\nudm:(Задача:завершить_задачу(задача,\"Задача выполнена исполнителем\",НД()));"
+          },
+          {
+            "id": "uuid647f4cd5723205.70955991",
+            "context": [
+              {
+                "id": "uuid647f51877237b2.77205197",
+                "name": "кредитная_заявка",
+                "type": "UDM",
+                "udm_type": "Кредитная_заявка.Кредитная_заявка",
+                "is_collection": false
+              }
+            ],
+            "script": "udm:(кредитная_заявка :\u003d задача.заявка);\nudm:(Задача:завершить_задачу(задача,\"Задача выполнена исполнителем\",НД()));\n\n//Назначаем задачу на сбор документов для андеррайтинга на инициатора заявки\nvar task_type \t\u003d udm:(Задача:Тип_задачи:актуальные_по_коду(\u0027запрос_документов\u0027)[0]);\nvar state\t\t\u003d udm:(Задача:Статус_задачи:по_коду(\"назначена\")[0]);\nvar user        \u003d udm:(задача.заявка.инициатор);\nvar task_doc_req \u003d udm:(Задача_заявки:создать_задачу_заявки(Задача.заявка, НД(), \u0027Сбор документов для Андеррайтинга\u0027, js:Задача:Тип_задачи(task_type), нд(), нд(), js:Политика_безопасности:Пользователь(user)));\nvar history     \u003d udm:(Задача:назначить_задачу(js:Задача:Задача(task_doc_req), js:Политика_безопасности:Пользователь(user), js:datetime(task_doc_req.срок_исполнения), \u0027Назначена системой\u0027));\n//смещаем запись истории для корректной сортировки\nhistory.дата_действия \u003d udm:(datesec(js:datetime(history.дата_действия), 1));\n//меняем статус у задачи эксперта\n//udm:(Задача_заявки:изменить_задачу_заявки(Задача, Задача:Статус_задачи:по_коду(\"запрос_документов\")[0], нд(), Задача.исполнитель, \u0027\u0027, Задача.срок_исполнения, \"Запрошены документы по заявке: \" + \u0027Сбор документов для Андеррайтинга\u0027));\n//task_doc_req.родительская \u003d udm:(Задача);\n//\u003c\u003cотправка уведомления\nvar param \u003d {\n    code_subject : \u0027запрос_документов\u0027,\n    code_text : \u0027запрос_документов\u0027,\n    address: [user.email],\n    user_login : user.логин\n}\nudm:(Задача_заявки:email_task_app(js:Задача:Задача(task_doc_req), js:variant(param)));\n//\u003e\u003eотправка уведомления\n\nudm:(задача.заявка.этап :\u003d Кредитная_заявка:Этап_рассмотрения:по_коду(\u0027экспертиза\u0027)[0]);"
+          }
+        ]
+      },
+      "validationErrors": "null"
+    },
+    "version": "1.3.03.19.01",
+    "expandedContent": true
+  }
+}
