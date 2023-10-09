@@ -1,21 +1,7 @@
 import win32gui
 import re
 import win32con
-
-class dotdict(dict):
-    """dot.notation access to dictionary attributes"""
-    __getattr__ = dict.get
-    __setattr__ = dict.__setitem__
-    __delattr__ = dict.__delitem__
-
-
-def dotify(dictionary: dict):
-    dictionary = dotdict(dictionary)
-    for k, v in dictionary.items():
-        if type(v) == dict:
-            dictionary[k] = dotify(v)
-    return dictionary
-
+import os
 
 class WindowFinder:
     """Class to find and make focus on a particular Native OS dialog/Window """
@@ -46,10 +32,15 @@ class WindowFinder:
                 # Нажатие на объект
                 win32gui.SendMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, 0)
                 win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, 0)
+            print(win32gui.GetClassName(hwnd), win32gui.GetWindowText(hwnd))
         win32gui.EnumChildWindows(self._handle, print_some, None)
+        # button = win32gui.FindWindowEx(self._handle, None,'Button', None) 
+        # # Press the left mouse button
+        # win32gui.SendMessage(button, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, 0)
+        # # Left mouse button up
+        # win32gui.SendMessage(button, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, 0)
     
     def input_path(self, path_name):
-        rects = []
         def print_some(hwnd, wildcard):
             if win32gui.GetClassName(hwnd) == 'Edit':
                 # Фокусирование на объекте
@@ -61,5 +52,12 @@ class WindowFinder:
 
                 # Печать текста
                 win32gui.SendMessage(hwnd, win32con.WM_SETTEXT, None, path_name)
-            rects.append(win32gui.GetWindowRect(hwnd))
+            # print(win32gui.GetClassName(hwnd), win32gui.GetWindowText(hwnd))
         win32gui.EnumChildWindows(self._handle, print_some, None)
+
+win = WindowFinder()
+win.find_window_wildcard(".*Открытие*") 
+win.set_foreground()
+path = ['C:\\', 'Users', 'barke', 'Downloads', 'spark.docx']
+win.input_path(os.path.join(*path))
+win.click_button()

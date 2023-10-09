@@ -1,5 +1,5 @@
 from api.driver import get_driver
-from api.utils import dotdict, dotify
+from api.utils import dotdict, dotify, WindowFinder
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -83,6 +83,7 @@ class testdriver:
         try:
             item = table_items[item_index]
             item.click()
+            time.sleep(0.3)
         except IndexError:
             print(f'Индекс {item_index} выше количества найденных значений ({len(table_items)})')
     
@@ -111,7 +112,7 @@ class testdriver:
 
     def setup_stage(self, stage_name):
         self.app_params.stage = stage_name
-        print('Текущий этап: ' + stage_name)
+        print('---> Текущий этап: ' + stage_name)
     
     def click_placeholder_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.placeholder_buttons.selector)))
@@ -127,12 +128,22 @@ class testdriver:
         tabs = self.multiselect(self.app_selectors.tabs[tab_group].selector)
         list(filter(lambda x: x.get_attribute('data-index') == str(self.app_selectors.tabs[tab_group].data_index[tab_code]), tabs))[0].click()
         time.sleep(1)
+    
+    def login(self, user):
+        self.print_to_input(self.platf_selectors.login_field, self.creds[user].login)
+        self.print_to_input(self.platf_selectors.pass_field, self.creds[user].password)
+        self.hit_enter(self.platf_selectors.pass_field)
+    
+    def logout(self):
+        self.click_element(self.platf_selectors.profile_icon)
+        self.click_element(self.platf_selectors.logout)
 
     def initiate_stage(self, initiator, stage_name):
         self.login(initiator)
         if not self.app_params.app_number:
             raise ValueError('Номер заявки пустой')
         self.setup_stage(stage_name)
+        self.change_application()
     
     def find_object_in_table(self, selector_group, search_params, wait=0):
         self.click_element(self.app_selectors[selector_group].clear_button, 0.5)
@@ -143,32 +154,60 @@ class testdriver:
             elif param.type == 'dropdown':
                 self.select_dropdown(self.app_selectors[selector_group].filter[param.field], param.value)
         
-        self.click_element(self.app_selectors[selector_group].search_button, 0.5)
+        self.click_element(self.app_selectors[selector_group].search_button, 1)
+        if selector_group == 'task_search':
+            self.click_menu_item('Все задачи')
+            time.sleep(0.5)
         self.select_table_item(self.app_selectors[selector_group].result_table_items, 0)
         self.click_table_button(self.app_selectors[selector_group].to_work_button)
         if wait != 0:
             time.sleep(wait)
     
-    def wait_doc_upload(self, click_selector, wait_selector):
-        wait_element = WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, wait_selector)))
-        if (wait_element):
-            self.click_element(click_selector)
+    def wait_doc_upload(self, click_selector):
+        self.upload_file()
+        time.sleep(0.5)
+        # wait_element = WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, wait_selector)))
+        # if (wait_element):
+        self.click_element(click_selector)
     
     def close_alert(self, wait=0):
+        alert = self.select('.jq_popup_message')
+        alert.send_keys(Keys.ESCAPE)
         time.sleep(0.5)
-        dialogs = len(self.multiselect('button.ui-dialog-titlebar-close'))
-        print(dialogs)
-        for _ in range(dialogs):
+
+    def close_popup(self, popup_selector):
+        alert = self.select(popup_selector)
+        alert.find_element(By.XPATH, '..').send_keys(Keys.ESCAPE)
+        time.sleep(0.5)
+    
+    def upload_file(self):
+        time.sleep(0.5)
+        win = WindowFinder()
+        win.find_window_wildcard(".*Открытие*") 
+        win.set_foreground()
+        path = self.config.app.file_path
+        print(f'Filename: {os.path.join(*path)}')
+        win.input_path(os.path.join(*path))
+        win.click_button()
+    
+    def change_application(self):
+        try:
+            icon = WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.icon22.forms')))
+            icon.click()
+            time.sleep(0.2)
+            lis = self.multiselect('.authDropdown.formChecker li')
+            for li in lis:
+                if 'АРМ_Пользователя' in li.text:
+                    li.click()
+            time.sleep(5)
+        except Exception:
+            print('Не замечено перехода в приложение')
+    
+    def close_toasts(self):
+        toasts = self.multiselect('.toast-element button.ui-dialog-titlebar-close')
+        for toast in toasts:
             try:
-                elem = self.select('button.ui-dialog-titlebar-close')
-                print(elem)
-                # elem.click()
-                elem.send_keys(Keys.ESCAPE)
-                print('CLICK')
+                toast.click()
             except Exception:
-                print('FAIL CLICK')
-                pass
-        print('-'*60)
-        if wait != 0:
-            time.sleep(wait)
+                print('Не удалось закрыть тост')
     

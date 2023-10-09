@@ -1,6 +1,7 @@
 {
     "app":{
-        "url": "http://fp-gnb.fisgroup.ru:8080/web/FormRunner/"
+        "url": "http://fp-gnb.fisgroup.ru:8080/web/FormRunner/",
+        "file_path": ["C:\\", "Users", "barke", "Downloads", "spark.docx"]
     },
     "creds": {
         "sales_manager": {
@@ -30,6 +31,10 @@
         "accountant_boss": {
             "login": "Бухгалтер_главный",
             "password": "Бухгалтер_главный"
+        },
+        "operation_boss": {
+            "login": "Начальник_ОО",
+            "password": "Начальник_ОО"
         }
     },
     "selectors": {
@@ -213,7 +218,9 @@
             },
             "cod": {
                 "loan_file": "[data-control-name='Файл_прикреплённый_кредитный_договор'] button.jq_attach__button.jq_attach__add_button",
+                "sign_file": "[data-control-name='Файл_подписанный_кредитный_договор'] button.jq_attach__button.jq_attach__add_button",
                 "loan_file_delete": "[data-control-name='Файл_прикреплённый_кредитный_договор'] button.jq_attach__button.jq_attach__del_button",
+                "sign_file_delete": "[data-control-name='Файл_подписанный_кредитный_договор'] button.jq_attach__button.jq_attach__del_button",
                 "accounts_title": "[data-control-name='Таблица_Счета'] .ui-table-mainheader",
                 "loan_inputs": {
                     "loan_number": "[data-control-name='Форма_договора_1'] [data-control-name='Поле_ввода_номера_договора'] input",
@@ -232,6 +239,12 @@
                     "order": {
                         "save": 0,
                         "cancel": 1
+                    }
+                },
+                "sign_contract_button_group": {
+                    "selector": "[data-control-name='Группа_кнопок_1'] button span",
+                    "order": {
+                        "save": 3
                     }
                 },
                 "pledges_table": "[data-control-name='Вкладка_договоры_залога_1'] [data-control-name='Таблица_договоров_залога'] tbody tr",
@@ -268,17 +281,36 @@
                     }
                 }
             },
+            "deal_prep": {
+                "checkboxes": "[data-control-name='Флажок_Подразделение'] label",
+                "block": "[data-control-name='Выбор_задачи_подразделения']",
+                "task_type": "[data-control-name='Раскрывающийся_список_Тип_задачи'] input",
+                "send_button": "[data-control-name='Кнопка_Отправить'] span",
+                "comment": "[data-control-name='Многострочное_поле_ввода_Комментарий'] textarea",
+                "date_input": "[data-control-name='Дата_отчетная'] input",
+                "upload_icon": "[data-control-name='Коллекция_файлов'] .add-button",
+                "add_file": ".file-dialog button.add-button",
+                "save_file": ".file-dialog button.save-button",
+                "task_intercept": "[data-control-name='Взятие_задачи_другого_исполнителя_1'] [data-control-name='Кнопка_да'] span"
+            },
             "tabs": {
                 "app_tabs": {
                     "selector": "[data-control-name='Вкладки_контейнер_заявки'] ul.tab-head li",
                     "data_index": {
                         "prescoring_decision": 7,
                         "documents": 3,
-                        "cod": 4
+                        "cod": 4,
+                        "deal_prep": 5
                     }
                 },
                 "task_decision": {
                     "selector": "[data-control-name='Контейнер_с_вкладками_Решение_по_задаче'] ul.tab-head li",
+                    "data_index": {
+                        "task_decision": 1
+                    }
+                },
+                "deal_prep": {
+                    "selector": "[data-control-name='Контейнер_с_вкладками'] ul.tab-head li",
                     "data_index": {
                         "task_decision": 1
                     }

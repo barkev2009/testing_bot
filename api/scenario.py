@@ -6,6 +6,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 import time
 import traceback
+import os
+import uuid
 
 def retry(func):
     def wrapper(self, *args, **kwargs):
@@ -17,9 +19,13 @@ def retry(func):
             except Exception as e:
                 counter += 1
                 print(f'Попыток израсходовано: {counter} | Функция: {func.__name__} | Ошибка: {repr(e)}')
-                print(f'Сообщение: {e}')
-                print('TRACEBACK')
-                traceback.print_exc()
+                # print(f'Сообщение: {e}')
+                traceback_uuid = str(uuid.uuid4())
+                print(f'Traceback ID: {traceback_uuid}')
+                with open(os.path.join('logs', f'{datetime.now().strftime("%d.%m.%Y")}.log'), 'a', encoding='utf-8') as file:
+                    file.write(f'Traceback ID: {traceback_uuid}\n')
+                    file.write(traceback.format_exc())
+                    file.write('\n'*5)
                 self.logout()
         if counter >= 5:
             print(f'{func.__name__} | ERROR: Израсходовано максимальное количество попыток')
@@ -30,15 +36,6 @@ class scenario_tester(testdriver):
         super().__init__()
         self.app_params.app_number = app_number
         print(f'Номер заявки: {app_number}')
-    
-    def login(self, user):
-        self.print_to_input(self.platf_selectors.login_field, self.creds[user].login)
-        self.print_to_input(self.platf_selectors.pass_field, self.creds[user].password)
-        self.hit_enter(self.platf_selectors.pass_field)
-    
-    def logout(self):
-        self.click_element(self.platf_selectors.profile_icon)
-        self.click_element(self.platf_selectors.logout)
     
     
     def fill_app_params(self, sales_channel, product_type, duration_unit, rate_type, rate_kind, rate, repayment_order):
@@ -83,6 +80,10 @@ class scenario_tester(testdriver):
             self.select_table_item(popup_selector + self.app_selectors.client_search.result_table_items, 0)
             self.click_element(self.app_selectors.app_creation.participant.save_participant, wait=0.5)
     
+
+
+
+    
     @retry
     def create_app(self):
         self.login('sales_manager')
@@ -103,7 +104,7 @@ class scenario_tester(testdriver):
 
     
     @retry
-    def draft_app(self):
+    def draft_app(self, pledges_count=0, parts_count=0):
         self.initiate_stage('sales_manager', 'Заполнение новой заявки')
         self.click_menu_item('Активные')
         self.find_object_in_table(
@@ -124,21 +125,26 @@ class scenario_tester(testdriver):
             ['Индивидуальный график платежей', 'Аннуитетные платежи']
             )
         
-        pledges = [
-            dotify({'type': 'Нематериальные активы', 'object_type': 'Залог векселей', 'pledge_descr': 'Заложек'}),
-            # dotify({'type': 'Нематериальные активы', 'object_type': 'Залог ценных бумаг', 'pledge_descr': 'ЦБшчка'}),
-            # dotify({'type': 'Нематериальные активы', 'object_type': 'Поручительства (гарантии)', 'pledge_descr': 'Гарантия'})
-        ]
+        pledges = []
+        if pledges_count != 0:
+            pledges = [
+                dotify({'type': 'Нематериальные активы', 'object_type': 'Залог векселей', 'pledge_descr': f'Заложек {i + 1}'})
+                for i in range(pledges_count)
+            ]
         if pledges:
             self.create_pledges('альфа', pledges)
         
-        participants = [
-            dotify({'type': 'Поручительство', 'search_value': 'альфа'})
-        ]
+        participants = []
+        if parts_count != 0:
+            participants = [
+                dotify({'type': f'Поручительство {i + 1}', 'search_value': 'альфа'})
+                for i in range(parts_count)
+            ]
         if participants:
             self.create_participants(participants)
 
         self.click_placeholder_button('to_accept')
+        time.sleep(2)
         self.logout()
     
     @retry
@@ -198,6 +204,7 @@ class scenario_tester(testdriver):
         self.print_to_input(self.app_selectors.prescoring.inform_date, datetime.now().strftime("%d.%m.%Y"))
         self.click_button_from_group(self.app_selectors.prescoring.inform, 'success')
         time.sleep(2)
+        self.logout()
     
     @retry
     def prescoring_documents(self):
@@ -245,7 +252,8 @@ class scenario_tester(testdriver):
         self.click_element(self.app_selectors.expertises.add_document_popup.upload)
 
         self.click_element(self.app_selectors.expertises.add_document_popup.add_file)
-        self.wait_doc_upload(self.app_selectors.expertises.add_document_popup.save_file, self.app_selectors.expertises.add_document_popup.download_file)
+        # self.wait_doc_upload(self.app_selectors.expertises.add_document_popup.save_file, self.app_selectors.expertises.add_document_popup.download_file)
+        self.wait_doc_upload(self.app_selectors.expertises.add_document_popup.save_file)
         self.click_element(self.app_selectors.expertises.add_document_popup.save_doc)
 
         self.click_placeholder_button('accept')
@@ -288,6 +296,7 @@ class scenario_tester(testdriver):
             else:
                 print('В данном заседании нет заявки')
         self.close_alert()
+        self.logout()
     
     @retry
     def sitting_complete_task(self, datetime=None):
@@ -298,7 +307,7 @@ class scenario_tester(testdriver):
             raise ValueError('Отсутствует дата заседания')
         
         self.click_menu_item('Мои задачи')
-        self.click_element(self.app_selectors.task_search.clear_button, wait=0.2)
+        self.click_element(self.app_selectors.task_search.clear_button, wait=0.5)
         table_items = self.multiselect(self.app_selectors.task_search.result_table_items)
         list(filter(lambda x: 'Очное' in x.text and self.app_params.sitting_datetime in x.text, table_items))[0].click()
         self.click_table_button(self.app_selectors.task_search.to_work_button)
@@ -346,12 +355,12 @@ class scenario_tester(testdriver):
         )
         for s in target_sittings:
             s.click()
-            time.sleep(0.5)
+            time.sleep(1)
             if self.app_params.app_number in ''.join([elem.text for elem in self.multiselect(self.app_selectors.secretary.apps_table)]):
                 actions = ActionChains(self.driver)
                 actions.move_to_element(s).perform()
                 self.select_table_item(self.app_selectors.secretary.apps_table)
-                time.sleep(1.5)
+                time.sleep(1)
                 self.click_table_button(self.app_selectors.secretary.inform_client)
                 time.sleep(0.5)
                 break
@@ -361,13 +370,14 @@ class scenario_tester(testdriver):
     @retry
     def inform_client_to_cod(self):
         self.initiate_stage('sales_manager', 'Информирование клиента, переход на КОД')
-        self.click_menu_item('Все задачи')
+        self.click_menu_item('Мои задачи')
 
         self.find_object_in_table(
             'task_search', 
             [
                 dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number}),
-                dotify({'type': 'dropdown', 'field': 'app_status', 'value': 'Информирование клиента'})
+                dotify({'type': 'dropdown', 'field': 'app_status', 'value': 'Информирование клиента'}),
+                dotify({'type': 'dropdown', 'field': 'task_type', 'value': 'Согласование условий сделки'})
             ],
             3
         )
@@ -413,7 +423,8 @@ class scenario_tester(testdriver):
         except Exception:
             pass
         self.click_element(addition+ self.app_selectors.cod.loan_file)
-        self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+        # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+        self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
         self.click_button_from_group(self.app_selectors.cod.save_contract_button_group, 'save', addition)
         self.close_alert()
 
@@ -438,7 +449,8 @@ class scenario_tester(testdriver):
                     pass
 
                 self.click_element(addition + self.app_selectors.cod.loan_file)
-                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
                 self.click_button_from_group(self.app_selectors.cod.save_contract_button_group, 'save', addition)
                 self.close_alert()
         except Exception:
@@ -465,7 +477,8 @@ class scenario_tester(testdriver):
                     pass
 
                 self.click_element(addition + self.app_selectors.cod.loan_file)
-                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
                 self.click_button_from_group(self.app_selectors.cod.save_contract_button_group, 'save', addition)
                 self.close_alert()
         except Exception:
@@ -495,25 +508,26 @@ class scenario_tester(testdriver):
         self.close_alert()
 
         # Залоги
-        # try:
-        addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
-        self.click_tab('cod_contracts', 'pledges')
+        try:
+            addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
+            self.click_tab('cod_contracts', 'pledges')
 
-        pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
-        for i in range(pledge_len):
-            item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
-            item.click()
-            time.sleep(0.5)
-            self.click_button_from_group(self.app_selectors.cod.pledges_button_group, 'edit')
-                            
-            self.select_dropdown(addition + self.app_selectors.accept_cod.result_dropdown, 'Согласован клиентом')
-            self.click_button_from_group(self.app_selectors.accept_cod.save_result_button_group, 'save', addition)
-            # time.sleep(0.5)
-            self.close_alert()
-            # self.close_alert()
-            time.sleep(0.5)
-        # except Exception:
-        #     print('Не получилось обработать залоги')
+            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+            for i in range(pledge_len):
+                item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
+                item.click()
+                time.sleep(0.5)
+                self.click_button_from_group(self.app_selectors.cod.pledges_button_group, 'edit')
+                                
+                self.select_dropdown(addition + self.app_selectors.accept_cod.result_dropdown, 'Согласован клиентом')
+                self.click_button_from_group(self.app_selectors.accept_cod.save_result_button_group, 'save', addition)
+                # time.sleep(0.5)
+                self.close_alert()
+                self.close_popup(addition)
+                # self.close_alert()
+                time.sleep(0.5)
+        except Exception:
+            print('Не получилось обработать залоги')
 
         # Поручительства
         try:
@@ -531,6 +545,7 @@ class scenario_tester(testdriver):
                 self.click_button_from_group(self.app_selectors.accept_cod.save_result_button_group, 'save', addition)
                 # time.sleep(0.5)
                 self.close_alert()
+                self.close_popup(addition)
                 # self.close_alert()
                 time.sleep(0.5)
         except Exception:
@@ -540,12 +555,233 @@ class scenario_tester(testdriver):
             comment = 'Согласовано по заявке ' + self.app_params.app_number
         if action_type == 'mild_reject':
             comment = 'Разрешимые разногласия по заявке ' + self.app_params.app_number
-        if action_type == 'accept':
+        if action_type == 'reject':
             comment = 'Неразрешимые разногласия по заявке ' + self.app_params.app_number
-        if action_type == 'accept':
+        if action_type == 'cod_error':
             comment = 'Ошибки КОД по заявке ' + self.app_params.app_number
 
         self.print_to_input(self.app_selectors.accept_cod.result_comment, comment, 0.5)
         self.click_button_from_group(self.app_selectors.accept_cod.result_button_group, action_type)
         time.sleep(0.5)
         self.logout()
+
+    @retry
+    def deal_prep_start(self):
+        self.initiate_stage('client_boss', 'Подготовка к сделке')
+        self.click_menu_item('Активные')
+
+        self.find_object_in_table(
+            'app_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number})
+            ],
+            3
+        )
+
+        self.click_tab('app_tabs', 'deal_prep')
+
+        checkboxes = self.multiselect(self.app_selectors.deal_prep.checkboxes)
+        checkboxes[2].click()
+        time.sleep(1)
+
+        block = self.multiselect(self.app_selectors.deal_prep.block)[2]
+        block.find_element(By.CSS_SELECTOR, self.app_selectors.deal_prep.task_type).send_keys('Запрос документов для открытия расчетного и/или залогового счета')
+
+        # Костыль 
+        self.click_element(self.app_selectors.deal_prep.send_button, 2)
+        self.click_element(self.app_selectors.deal_prep.send_button, 2)
+
+        self.logout()
+    
+    @retry
+    def deal_prep_req_acc_docs(self, task_type='Запрос документов для открытия расчетного и/или залогового счета'):
+        self.initiate_stage('sales_manager', f'{task_type}, подготовка к сделке')
+        self.click_menu_item('Мои задачи')
+
+        self.find_object_in_table(
+            'task_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number}),
+                dotify({'type': 'dropdown', 'field': 'app_status', 'value': 'Подготовка к сделке'}),
+                dotify({'type': 'dropdown', 'field': 'task_type', 'value': task_type})
+            ],
+            3
+        )
+        
+        self.click_tab('deal_prep', 'task_decision')
+
+        self.print_to_input(self.app_selectors.deal_prep.comment, 'Какой-то комментарий')
+        
+        self.click_element(self.app_selectors.deal_prep.upload_icon, 0.5)
+        self.click_element(self.app_selectors.deal_prep.add_file)
+        self.wait_doc_upload(self.app_selectors.deal_prep.save_file)
+        time.sleep(0.5)
+        self.click_func_button('to_accept')
+        time.sleep(0.5)
+        self.logout()
+    
+    @retry
+    def deal_prep_accept_req_docs(self):
+        self.initiate_stage('sales_boss', 'Акцепт задачи на прикрепление документа, подготовка к сделке')
+        self.click_menu_item('На акцепт')
+        
+        self.find_object_in_table(
+            'task_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number}),
+                dotify({'type': 'dropdown', 'field': 'task_status', 'value': 'Требуется акцепт'})
+            ],
+            3
+        )
+
+        self.click_func_button('accept')
+        self.logout()
+    
+    @retry
+    def deal_prep_open_acc(self):
+        self.initiate_stage('operation_boss', 'Открытие счета, подготовка к сделке')
+        self.click_menu_item('Мои задачи')
+
+        self.find_object_in_table(
+            'task_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number}),
+                dotify({'type': 'dropdown', 'field': 'app_status', 'value': 'Подготовка к сделке'}),
+                dotify({'type': 'dropdown', 'field': 'task_type', 'value': 'Открытие р/с и/или залогового счёта'})
+            ],
+            1
+        )
+        
+        try:
+            self.click_element(self.app_selectors.deal_prep.task_intercept, 3)
+        except Exception:
+            print('Нет требования по перехвату')
+        self.click_tab('deal_prep', 'task_decision')
+
+        self.print_to_input(self.app_selectors.deal_prep.comment, 'Какой-то комментарий')
+        self.print_to_input(self.app_selectors.deal_prep.date_input, datetime.now().strftime("%d.%m.%Y"))
+        
+        self.click_element(self.app_selectors.deal_prep.upload_icon, 0.5)
+        self.click_element(self.app_selectors.deal_prep.add_file)
+        self.wait_doc_upload(self.app_selectors.deal_prep.save_file)
+        time.sleep(0.5)
+        self.click_func_button('accept')
+        time.sleep(0.5)
+        self.logout()
+    
+    @retry
+    def deal_prep_end(self):
+        self.initiate_stage('client_boss', 'Подготовка к сделке, финиш')
+        self.click_menu_item('Активные')
+
+        self.find_object_in_table(
+            'app_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number})
+            ],
+            3
+        )
+
+        self.click_placeholder_button('accept')
+        time.sleep(1)
+        self.close_toasts()
+        time.sleep(1)
+
+        self.logout()
+    
+    @retry
+    def deal(self):
+        self.initiate_stage('client_boss', 'Сделка, старт')
+        self.click_menu_item('Активные')
+        addition = "[data-control-name='Вкладка_кредитный_договор_1'] "
+
+        self.find_object_in_table(
+            'app_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number})
+            ],
+            3
+        )
+
+        self.click_tab('app_tabs', 'cod')
+
+        try:
+            if (self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete)):
+                self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete).click()
+        except Exception:
+            pass
+        self.click_element(addition + self.app_selectors.cod.sign_file)
+        # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+        self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
+        self.click_button_from_group(self.app_selectors.cod.sign_contract_button_group, 'save', addition)
+        self.close_alert()
+
+        # Залоги
+        try:
+            addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
+            self.click_tab('cod_contracts', 'pledges')
+
+            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+            for i in range(pledge_len):
+                item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
+                item.click()
+                time.sleep(0.5)
+                self.click_button_from_group(self.app_selectors.cod.pledges_button_group, 'edit')
+                
+                try:
+                    if (self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete)):
+                        self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete).click()
+                except Exception:
+                    pass
+
+                self.click_element(addition + self.app_selectors.cod.sign_file)
+                # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
+                self.click_button_from_group(self.app_selectors.cod.sign_contract_button_group, 'save', addition)
+                self.close_alert()
+        except Exception:
+            print('Не получилось обработать залоги')
+        
+        # Поручительства
+        try:
+            addition = "[data-control-name='Всплывающее_окно_редактирования'] "
+            self.click_tab('cod_contracts', 'participants')
+
+            part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
+            for i in range(part_len):
+                item = self.multiselect(self.app_selectors.cod.participants_table)[i]
+                item.click()
+                time.sleep(0.5)
+                self.click_button_from_group(self.app_selectors.cod.parts_button_group, 'edit')
+                
+                try:
+                    if (self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete)):
+                        self.driver.find_element(By.CSS_SELECTOR, addition + self.app_selectors.cod.sign_file_delete).click()
+                except Exception:
+                    pass
+
+                self.click_element(addition + self.app_selectors.cod.sign_file)
+                # self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title, addition + self.app_selectors.cod.loan_file_delete)
+                self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
+                self.click_button_from_group(self.app_selectors.cod.sign_contract_button_group, 'save', addition)
+                self.close_alert()
+        except Exception:
+            print('Не получилось обработать поручительства')
+        
+        self.click_placeholder_button('accept')
+        self.logout()
+    
+    @retry
+    def deal_abs(self):
+        self.initiate_stage('accountant_boss', 'Внесение данных сделки в АБС')
+        self.click_menu_item('Мои задачи')
+
+        self.find_object_in_table(
+            'task_search', 
+            [
+                dotify({'type': 'input', 'field': 'app_number', 'value': self.app_params.app_number}),
+                dotify({'type': 'dropdown', 'field': 'app_status', 'value': 'На сопровождении'}),
+                dotify({'type': 'dropdown', 'field': 'task_type', 'value': 'Принятие в сопровождение'})
+            ],
+            1
+        )
