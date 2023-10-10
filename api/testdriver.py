@@ -1,5 +1,5 @@
 from api.driver import get_driver
-from api.utils import dotdict, dotify, WindowFinder
+from api.utils import dotify, WindowFinder, bcolors
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -11,6 +11,9 @@ from functools import wraps
 import os
 import json
 import time 
+import traceback
+from datetime import datetime
+import uuid
 
 def wait(seconds):
     def outer(func):
@@ -19,6 +22,28 @@ def wait(seconds):
             time.sleep(seconds)
         return wrapper
     return outer
+
+def retry(func):
+    def wrapper(self, *args, **kwargs):
+        counter = 0
+        while counter < 5:
+            try:
+                func(self, *args, **kwargs)
+                break
+            except Exception as e:
+                counter += 1
+                print(f'{bcolors.FAIL}Попыток израсходовано: {counter} | Функция: {func.__name__} | Ошибка: {bcolors.OKBLUE}{repr(e)}{bcolors.ENDC}')
+                # print(f'Сообщение: {e}')
+                traceback_uuid = str(uuid.uuid4())
+                print(f'{bcolors.FAIL}Traceback ID: {bcolors.OKBLUE}{traceback_uuid}{bcolors.ENDC}')
+                with open(os.path.join('logs', f'{datetime.now().strftime("%d.%m.%Y")}.log'), 'a', encoding='utf-8') as file:
+                    file.write(f'Traceback ID: {traceback_uuid}\n')
+                    file.write(traceback.format_exc())
+                    file.write('\n'*5)
+                self.logout()
+        if counter >= 5:
+            print(f'{func.__name__} | ERROR: Израсходовано максимальное количество попыток')
+    return wrapper
 
 class testdriver:
 
@@ -112,7 +137,7 @@ class testdriver:
 
     def setup_stage(self, stage_name):
         self.app_params.stage = stage_name
-        print('---> Текущий этап: ' + stage_name)
+        print(f'{bcolors.OKGREEN}---> Текущий этап: {stage_name}{bcolors.ENDC}')
     
     def click_placeholder_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.placeholder_buttons.selector)))

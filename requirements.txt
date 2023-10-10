@@ -1,2 +1,3 @@
 selenium
 pywin32==300
+pyqt6
