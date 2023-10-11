@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import json
 import os
-import time
 
 def get_driver():
     with open(os.path.join('config', 'config.json'), 'r', encoding='utf-8') as file:

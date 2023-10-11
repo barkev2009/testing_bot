@@ -15,7 +15,7 @@ def test_existing_app(func_list, app_numbers):
 def get_all_functions():
     return [
         ['Создание заявки', scenario_tester.create_app, {}],
-        ['Первичное заполнение заявки', scenario_tester.draft_app, {'pledges_count': 1, 'parts_count': 1}],
+        ['Первичное заполнение заявки', scenario_tester.draft_app, {'pledges_count': 2, 'parts_count': 1}],
         ['Акцепт новой заявки', scenario_tester.accept_new_app, {}],
         ['Прескоринг', scenario_tester.prescoring, {}],
         ['Информирование клиента о прескоринге', scenario_tester.prescoring_inform, {}],
@@ -39,7 +39,7 @@ def get_all_functions():
 
 if __name__ == '__main__':
     funcs = get_all_functions()
-    test_new_app(funcs)
+    # test_new_app(funcs)
     # test_existing_app(funcs, ['1611/1376'])
 
     # driver = scenario_tester()

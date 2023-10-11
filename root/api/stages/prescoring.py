@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 class prescoring(testdriver):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
     
     @retry
@@ -27,7 +27,7 @@ class prescoring(testdriver):
         time.sleep(0.5)
         self.click_placeholder_button('accept')
         self.logout()
-
+    
     @retry
     def prescoring_inform(self):
         self.initiate_stage('sales_manager', 'Прескоринг информирование')

@@ -1,6 +1,3 @@
-from root.api.testdriver import retry
-from root.api.utils import dotify
-
 from root.api.stages.draft_app import draft_app
 from root.api.stages.prescoring import prescoring
 from root.api.stages.expertises import expertises
