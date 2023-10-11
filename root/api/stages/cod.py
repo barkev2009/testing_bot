@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
-from api.testdriver import testdriver, retry
-from api.utils import dotify
+from root.api.testdriver import testdriver, retry
+from root.api.utils import dotify
 
 import time
 from datetime import datetime, timedelta
@@ -46,12 +46,12 @@ class cod(testdriver):
         self.close_alert()
 
         # Залоги
-        try:
-            addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
-            self.click_tab('cod_contracts', 'pledges')
+        addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
+        self.click_tab('cod_contracts', 'pledges')
 
-            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
-            for i in range(pledge_len):
+        pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        for i in range(pledge_len):
+            try:
                 item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
                 item.click()
                 time.sleep(0.5)
@@ -70,16 +70,16 @@ class cod(testdriver):
                 self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
                 self.click_button_from_group(self.app_selectors.cod.save_contract_button_group, 'save', addition)
                 self.close_alert()
-        except Exception:
-            print('Не получилось обработать залоги')
+            except Exception:
+                print(f'Не получилось обработать залог {i + 1}')
         
         # Поручительства
-        try:
-            addition = "[data-control-name='Всплывающее_окно_редактирования'] "
-            self.click_tab('cod_contracts', 'participants')
+        addition = "[data-control-name='Всплывающее_окно_редактирования'] "
+        self.click_tab('cod_contracts', 'participants')
 
-            part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
-            for i in range(part_len):
+        part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
+        for i in range(part_len):
+            try:
                 item = self.multiselect(self.app_selectors.cod.participants_table)[i]
                 item.click()
                 time.sleep(0.5)
@@ -98,8 +98,8 @@ class cod(testdriver):
                 self.wait_doc_upload(addition + self.app_selectors.cod.accounts_title)
                 self.click_button_from_group(self.app_selectors.cod.save_contract_button_group, 'save', addition)
                 self.close_alert()
-        except Exception:
-            print('Не получилось обработать поручительства')
+            except Exception:
+                print(f'Не получилось обработать поручительство {i + 1}')
         
         self.click_placeholder_button('accept')
         self.logout()
@@ -125,12 +125,12 @@ class cod(testdriver):
         self.close_alert()
 
         # Залоги
-        try:
-            addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
-            self.click_tab('cod_contracts', 'pledges')
+        addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
+        self.click_tab('cod_contracts', 'pledges')
 
-            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
-            for i in range(pledge_len):
+        pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        for i in range(pledge_len):
+            try:
                 item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
                 item.click()
                 time.sleep(0.5)
@@ -143,16 +143,16 @@ class cod(testdriver):
                 self.close_popup(addition)
                 # self.close_alert()
                 time.sleep(0.5)
-        except Exception:
-            print('Не получилось обработать залоги')
+            except Exception:
+                print(f'Не получилось обработать залог {i + 1}')
 
         # Поручительства
-        try:
-            addition = "[data-control-name='Всплывающее_окно_редактирования'] "
-            self.click_tab('cod_contracts', 'participants')
+        addition = "[data-control-name='Всплывающее_окно_редактирования'] "
+        self.click_tab('cod_contracts', 'participants')
 
-            part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
-            for i in range(part_len):
+        part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
+        for i in range(part_len):
+            try:
                 item = self.multiselect(self.app_selectors.cod.participants_table)[i]
                 item.click()
                 time.sleep(0.5)
@@ -165,8 +165,8 @@ class cod(testdriver):
                 self.close_popup(addition)
                 # self.close_alert()
                 time.sleep(0.5)
-        except Exception:
-            print('Не получилось обработать поручительства')
+            except Exception:
+                print(f'Не получилось обработать поручительство {i + 1}')
 
         if action_type == 'accept':
             comment = 'Согласовано по заявке ' + self.app_params.app_number

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.action_chains import ActionChains
 
-from api.testdriver import testdriver, retry
-from api.utils import dotify
+from root.api.testdriver import testdriver, retry
+from root.api.utils import dotify
 
 import time
 from datetime import datetime

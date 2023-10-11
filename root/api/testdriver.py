@@ -1,5 +1,5 @@
-from api.driver import get_driver
-from api.utils import dotify, WindowFinder, bcolors
+from root.api.driver import get_driver
+from root.api.utils import dotify, WindowFinder, bcolors
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -201,9 +201,13 @@ class testdriver:
         time.sleep(0.5)
 
     def close_popup(self, popup_selector):
-        alert = self.select(popup_selector)
-        alert.find_element(By.XPATH, '..').send_keys(Keys.ESCAPE)
-        time.sleep(0.5)
+        try:
+            alert = WebDriverWait(self.driver, 1).until(EC.element_to_be_clickable((By.CSS_SELECTOR, popup_selector)))
+            if alert:
+                alert.find_element(By.XPATH, '..').send_keys(Keys.ESCAPE)
+                time.sleep(0.5)
+        except Exception:
+            print('Failed to close popup')
     
     def upload_file(self):
         time.sleep(0.5)
@@ -216,6 +220,8 @@ class testdriver:
         win.click_button()
     
     def change_application(self):
+        # self.login('ca_boss')
+        # for _ in range(5):
         try:
             icon = WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.icon22.forms')))
             icon.click()
@@ -224,7 +230,8 @@ class testdriver:
             for li in lis:
                 if 'АРМ_Пользователя' in li.text:
                     li.click()
-            time.sleep(5)
+                    self.select('.logo').click()
+            time.sleep(2)
         except Exception:
             print('Не замечено перехода в приложение')
     
