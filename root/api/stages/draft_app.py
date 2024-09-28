@@ -51,6 +51,7 @@ class draft_app(testdriver):
 
     @retry
     def create_app(self):
+        self.setup_stage('Создание новой заявки')
         self.login('sales_manager')
         self.click_menu_item('Поиск')
         self.find_object_in_table(
@@ -66,6 +67,8 @@ class draft_app(testdriver):
         self.get_app_number()
         # Небольшой костыль для того, чтобы нормально залоги создавались, можно обойти поумнее, но пока лень
         self.logout()
+        for k, v in self.errors.items():
+            print(f'{k}: {len(v)}')
         
     @retry
     def draft_app(self, pledges_count=0, parts_count=0):
@@ -110,6 +113,8 @@ class draft_app(testdriver):
         self.click_placeholder_button('to_accept')
         time.sleep(2)
         self.logout()
+        for k, v in self.errors.items():
+            print(f'{k}: {len(v)}')
     
     @retry
     def accept_new_app(self):
@@ -127,3 +132,5 @@ class draft_app(testdriver):
 
         self.click_placeholder_button('accept')
         self.logout()
+        for k, v in self.errors.items():
+            print(f'{k}: {len(v)}')

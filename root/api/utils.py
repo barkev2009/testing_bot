@@ -1,6 +1,10 @@
 import win32gui
 import re
 import win32con
+import os
+from datetime import datetime
+import uuid
+import traceback
 
 class dotdict(dict):
     """dot.notation access to dictionary attributes"""
@@ -75,3 +79,19 @@ class WindowFinder:
                 win32gui.SendMessage(hwnd, win32con.WM_SETTEXT, None, path_name)
             rects.append(win32gui.GetWindowRect(hwnd))
         win32gui.EnumChildWindows(self._handle, print_some, None)
+    
+
+def exit_with_grace(func):
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            counter += 1
+            print(f'{bcolors.FAIL}Попыток израсходовано: {counter} | Функция: {func.__name__} | Ошибка: {bcolors.OKBLUE}{repr(e)}{bcolors.ENDC}')
+            traceback_uuid = str(uuid.uuid4())
+            print(f'{bcolors.FAIL}Traceback ID: {bcolors.OKBLUE}{traceback_uuid}{bcolors.ENDC}')
+            with open(os.path.join('logs', f'{datetime.now().strftime("%d.%m.%Y")}.log'), 'a', encoding='utf-8') as file:
+                file.write(f'Traceback ID: {traceback_uuid}\n')
+                file.write(traceback.format_exc())
+                file.write('\n'*5)
+    return wrapper

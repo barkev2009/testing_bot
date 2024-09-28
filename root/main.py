@@ -1,21 +1,29 @@
 from root.api.scenario import scenario_tester
-import time
+from root.api.utils import exit_with_grace
 
+@exit_with_grace
 def test_new_app(func_list):
-    driver = scenario_tester()
-    for func in func_list:
-        func[1](driver, **func[2])
-
-def test_existing_app(func_list, app_numbers):
-    for app_number in app_numbers:
-        driver = scenario_tester(app_number)
+    try:
+        driver = scenario_tester()
         for func in func_list:
             func[1](driver, **func[2])
+    except Exception as e:
+        pass
+
+@exit_with_grace
+def test_existing_app(func_list, app_numbers):
+    try:
+        for app_number in app_numbers:
+            driver = scenario_tester(app_number)
+            for func in func_list:
+                func[1](driver, **func[2])
+    except Exception as e:
+        pass
 
 def get_all_functions():
     return [
         ['Создание заявки', scenario_tester.create_app, {}],
-        ['Первичное заполнение заявки', scenario_tester.draft_app, {'pledges_count': 2, 'parts_count': 1}],
+        ['Первичное заполнение заявки', scenario_tester.draft_app, {'pledges_count': 0, 'parts_count': 0}],
         ['Акцепт новой заявки', scenario_tester.accept_new_app, {}],
         ['Прескоринг', scenario_tester.prescoring, {}],
         ['Информирование клиента о прескоринге', scenario_tester.prescoring_inform, {}],

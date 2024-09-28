@@ -27,6 +27,8 @@ class prescoring(testdriver):
         time.sleep(0.5)
         self.click_placeholder_button('accept')
         self.logout()
+        for k, v in self.errors.items():
+            print(f'{k}: {len(v)}')
     
     @retry
     def prescoring_inform(self):

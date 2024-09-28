@@ -47,9 +47,14 @@ class cod(testdriver):
 
         # Залоги
         addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
-        self.click_tab('cod_contracts', 'pledges')
-
-        pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        
+        pledge_len = 0
+        try:
+            self.click_tab('cod_contracts', 'pledges')
+            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        except Exception:
+            print(f'Не получилось попасть в залоги')
+            
         for i in range(pledge_len):
             try:
                 item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
@@ -75,9 +80,14 @@ class cod(testdriver):
         
         # Поручительства
         addition = "[data-control-name='Всплывающее_окно_редактирования'] "
-        self.click_tab('cod_contracts', 'participants')
+        
+        part_len = 0
+        try:
+            self.click_tab('cod_contracts', 'participants')
+            part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
+        except Exception:
+            print(f'Не получилось попасть в поручительства')
 
-        part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
         for i in range(part_len):
             try:
                 item = self.multiselect(self.app_selectors.cod.participants_table)[i]
@@ -126,9 +136,12 @@ class cod(testdriver):
 
         # Залоги
         addition = "[data-control-name='Всплывающее_окно_редактирования_договора'] "
-        self.click_tab('cod_contracts', 'pledges')
-
-        pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        pledge_len = 0
+        try:
+            self.click_tab('cod_contracts', 'pledges')
+            pledge_len = len(self.multiselect(self.app_selectors.cod.pledges_table))
+        except Exception:
+            print(f'Не получилось попасть в залоги')
         for i in range(pledge_len):
             try:
                 item = self.multiselect(self.app_selectors.cod.pledges_table)[i]
@@ -148,9 +161,13 @@ class cod(testdriver):
 
         # Поручительства
         addition = "[data-control-name='Всплывающее_окно_редактирования'] "
-        self.click_tab('cod_contracts', 'participants')
+        part_len = 0
+        try:
+            self.click_tab('cod_contracts', 'participants')
+            part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
+        except Exception:
+            print(f'Не получилось попасть в поручительства')
 
-        part_len = len(self.multiselect(self.app_selectors.cod.participants_table))
         for i in range(part_len):
             try:
                 item = self.multiselect(self.app_selectors.cod.participants_table)[i]

@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-from functools import wraps
 import os
 import json
 import time 
@@ -15,13 +14,20 @@ import traceback
 from datetime import datetime
 import uuid
 
-def wait(seconds):
-    def outer(func):
-        def wrapper(*args, **kwargs):
-            func(*args, **kwargs)
-            time.sleep(seconds)
-        return wrapper
-    return outer
+
+def collect_errors(func):
+    def wrapper(self, *args, **kwargs):
+        result = func(self, *args, **kwargs)
+        try:
+            errors = self.driver.execute_script('return VCM.parent.$APP.errors')
+            if errors and self.app_params.stage:
+                self.errors[self.app_params.stage] = self.driver.execute_script('return VCM.parent.$APP.errors')
+                with open(os.path.join('logs', 'platf_errors', f'{self.uuid}.log'), 'w', encoding='utf-8') as file:
+                    json.dump(self.errors, file, ensure_ascii=False, indent=4)
+        except Exception:
+            pass
+        return result
+    return wrapper
 
 def retry(func):
     def wrapper(self, *args, **kwargs):
@@ -36,7 +42,7 @@ def retry(func):
                 # print(f'Сообщение: {e}')
                 traceback_uuid = str(uuid.uuid4())
                 print(f'{bcolors.FAIL}Traceback ID: {bcolors.OKBLUE}{traceback_uuid}{bcolors.ENDC}')
-                with open(os.path.join('logs', f'{datetime.now().strftime("%d.%m.%Y")}.log'), 'a', encoding='utf-8') as file:
+                with open(os.path.join('logs', 'bot_errors', f'{datetime.now().strftime("%d.%m.%Y")}.log'), 'a', encoding='utf-8') as file:
                     file.write(f'Traceback ID: {traceback_uuid}\n')
                     file.write(traceback.format_exc())
                     file.write('\n'*5)
@@ -51,6 +57,8 @@ class testdriver:
 
     def __init__(self) -> None:
         self.driver = get_driver()
+        self.errors = dotify({})
+        self.uuid = str(uuid.uuid4())
         with open(os.path.join('config', 'config.json'), 'r', encoding='utf-8') as file:
             self.config = dotify(json.load(file)) 
         self.app_selectors = self.config.selectors.app
@@ -61,11 +69,17 @@ class testdriver:
             'stage': None,
             'sitting_datetime': None
         })
+        for dir in ['bot_errors', 'platf_errors']:
+            if dir not in os.listdir('logs'):
+                os.mkdir(dir)
+        print(f'{bcolors.HEADER}Driver ID: {self.uuid}{bcolors.ENDC}')
     
+    @collect_errors
     def select(self, selector):
         element = WebDriverWait(self.driver, self.DELAY).until(EC.element_to_be_clickable((By.CSS_SELECTOR, selector)))
         return element
     
+    @collect_errors
     def multiselect(self, selector):
         element = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, selector)))
         return element
@@ -89,11 +103,11 @@ class testdriver:
         if wait != 0:
             time.sleep(wait)
     
-    @wait(0.5)
     def click_table_button(self, selector):
         elem = self.select(selector)
         ac = ActionChains(self.driver)
         ac.move_to_element(elem).move_by_offset(2, 2).click().perform()
+        time.sleep(0.5)
     
     def click_menu_item(self, item_name):
         menu_items = self.multiselect(self.app_selectors.main_menu_items)
@@ -117,33 +131,33 @@ class testdriver:
         self.app_params.app_number = app_number.get_attribute('value')
         print(f'Номер заявки: {self.app_params.app_number}')
     
-    @wait(1)
     def select_dropdown(self, dropdown_selector, dropdown_value):
         if type(dropdown_value) == list:
             for item in dropdown_value:
                 self.print_to_input(dropdown_selector, item)
-                # self.click_element(dropdown_selector)
         else:
             self.print_to_input(dropdown_selector, dropdown_value)
-            # self.click_element(dropdown_selector)
+        time.sleep(1)
     
-    @wait(0.5)
     def click_button_from_group(self, button_group_selector, button_code, addition=None):
         if addition:
             buttons = self.multiselect(addition + button_group_selector.selector)
         else:
             buttons = self.multiselect(button_group_selector.selector)
         buttons[button_group_selector.order[button_code]].click()
+        time.sleep(0.5)
 
     def setup_stage(self, stage_name):
         self.app_params.stage = stage_name
         print(f'{bcolors.OKGREEN}---> Текущий этап: {stage_name}{bcolors.ENDC}')
     
+    @collect_errors
     def click_placeholder_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.placeholder_buttons.selector)))
         buttons[self.app_selectors.placeholder_buttons.order[button_code]].click()
         time.sleep(2)
     
+    @collect_errors
     def click_func_button(self, button_code):
         buttons = WebDriverWait(self.driver, self.DELAY).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, self.app_selectors.func_buttons.selector)))
         buttons[self.app_selectors.func_buttons.order[button_code]].click()
@@ -220,8 +234,6 @@ class testdriver:
         win.click_button()
     
     def change_application(self):
-        # self.login('ca_boss')
-        # for _ in range(5):
         try:
             icon = WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.icon22.forms')))
             icon.click()
